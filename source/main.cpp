@@ -1,5 +1,4 @@
 #include "Engine.h"
-
 #include <chrono>
 
 int main()
@@ -19,6 +18,9 @@ int main()
 	std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
 	std::chrono::duration<double> diff;
 	double delta;
+
+	EntityManager manager;
+	Entity& object = manager.add_entity();
 
 	while (isWork)
 	{

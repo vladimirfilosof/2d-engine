@@ -23,7 +23,7 @@ LIBS := -lSDL2
 # Defines (ex: -D DEBUG, -Dcount=5)
 DEF :=
 # Directories with source code (ex: source)
-DIR := source
+DIR := source source/ECS
 
 #---------------------------------------#
 
