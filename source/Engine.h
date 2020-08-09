@@ -3,5 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include "ECS/ECS.h"
+#include "ECS/Components.h"
 
 #endif

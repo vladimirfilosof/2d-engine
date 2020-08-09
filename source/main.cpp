@@ -21,6 +21,7 @@ int main()
 
 	EntityManager manager;
 	Entity& object = manager.add_entity();
+	object.add_component<BoxComponent>(renderer, 100, 100, 0, 0);
 
 	while (isWork)
 	{
@@ -33,6 +34,7 @@ int main()
 		SDL_RenderClear(renderer);
 
 // Check events
+		manager.update();
 		while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_QUIT)
@@ -45,6 +47,7 @@ int main()
 			}
 		}
 
+		manager.draw();
 // Update renderer
 		SDL_RenderPresent(renderer);
 	}
