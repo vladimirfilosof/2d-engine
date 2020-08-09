@@ -12,6 +12,10 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	for (auto& item : components)
+	{
+		delete item;
+	}
 }
 
 void Entity::draw()
@@ -35,6 +39,10 @@ EntityManager::EntityManager()
 }
 EntityManager::~EntityManager()
 {
+	for (auto& item : entities)
+	{
+		delete item;
+	}
 }
 
 void EntityManager::draw()
