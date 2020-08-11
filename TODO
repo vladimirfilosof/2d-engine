@@ -1,9 +1,4 @@
-1. Vector2D
-	Class storage XY coords as double
-	Class can zeroize coords
-	Class can add/subtract/multiply/divide other class to itself
-	Class can muptiply itself with number
-2. Transorm component
+1. Transorm component
 	That component describes entity coords and size
-3. Physic component
+2. Physic component
 	That component moves object and, mb, adds force to object

@@ -4,6 +4,6 @@
 #include <SDL2/SDL.h>
 #include "ECS/ECS.h"
 #include "ECS/Components.h"
-#include "ECS/Vector2D.h"
+#include "Vector2D.h"
 
 #endif
