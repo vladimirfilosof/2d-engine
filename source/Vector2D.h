@@ -8,8 +8,8 @@ public:
 	Vector2D (const double& x, const double& y);
 	~Vector2D ();
 	void zeroize ();
-	double& X();
-	double& Y();
+	double& x();
+	double& y();
 
 	friend Vector2D operator + (Vector2D& first, Vector2D& second);
 	friend Vector2D operator - (Vector2D& first, Vector2D& second);
@@ -21,8 +21,8 @@ public:
 	Vector2D& operator *= (const double& num);
 	Vector2D& operator /= (const double& num);
 private:
-	double x = 0;
-	double y = 0;
+	double xpos = 0;
+	double ypos = 0;
 };
 
 #endif

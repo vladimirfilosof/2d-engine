@@ -6,65 +6,66 @@ Vector2D::Vector2D()
 
 Vector2D::Vector2D(const double& x, const double& y)
 {
-	this->x = x;
-	this->y = y;
+	xpos = x;
+	ypos = y;
 }
 
 Vector2D::~Vector2D()
 {}
 
-double& Vector2D::X() {return x;}
-double& Vector2D::Y() {return y;}
+double& Vector2D::x() {return xpos;}
+double& Vector2D::y() {return ypos;}
+
 void Vector2D::zeroize() 
 {
-	this->x = 0;
-	this->y = 0;
+	xpos = 0;
+	ypos = 0;
 }
 
 Vector2D operator + (Vector2D& first, Vector2D& second)
 {
-	return Vector2D(first.x + second.x, first.y + second.y); 
+	return Vector2D(first.xpos + second.xpos, first.ypos + second.ypos); 
 }
 
 Vector2D operator - (Vector2D& first, Vector2D& second)
 {
-	return Vector2D(first.x - second.x, first.y - second.y);	
+	return Vector2D(first.xpos - second.xpos, first.ypos - second.ypos);	
 }
 
 Vector2D operator * (Vector2D& vector, const double& num)
 {
-	return Vector2D (vector.x * num, vector.y * num);
+	return Vector2D (vector.xpos * num, vector.ypos * num);
 }
 
 Vector2D operator / (Vector2D& vector, const double& num)
 {
-	return Vector2D (vector.x / num, vector.y / num);
+	return Vector2D (vector.xpos / num, vector.ypos / num);
 }
 
 Vector2D& Vector2D::operator += (Vector2D& right) 
 {
-	x += right.x;
-	y += right.y;
+	xpos += right.xpos;
+	ypos += right.ypos;
 	return *this;
 }
 
 Vector2D& Vector2D::operator -= (Vector2D& right)
 {
-	x -= right.x;
-	y -= right.y;
+	xpos -= right.xpos;
+	ypos -= right.ypos;
 	return *this;
 }
 
 Vector2D& Vector2D::operator *= (const double& num)
 {
-	x *= num;
-	y *= num;
+	xpos *= num;
+	ypos *= num;
 	return *this;
 }
 
 Vector2D& Vector2D::operator /= (const double& num)
 {
-	x /= num;
-	y /= num;
+	xpos /= num;
+	ypos /= num;
 	return *this;
 }

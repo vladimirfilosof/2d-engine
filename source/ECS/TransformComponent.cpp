@@ -1,14 +1,19 @@
 #include "TransformComponent.h"
 
 // difinition Size class
-Size::Size(){}
-Size::Size(unsigned int height, unsigned int width)
+Size::Size()
+{
+	height = 0;
+	width = 0;
+}
+Size::Size(const unsigned int& height, const unsigned int& width)
 {
 	this->height = height;
 	this->width = width;
 }
 
-Size::~Size(){}
+Size::~Size()
+{}
 
 unsigned int& Size::h()
 {
@@ -22,17 +27,21 @@ unsigned int& Size::w()
 
 // difinition TransformComponent
 
-TransformComponent::TransformComponent(){}
-TransformComponent::TransformComponent(double x, double y, unsigned int h, unsigned int w)
+TransformComponent::TransformComponent()
 {
-	obj_coords.X() = x;
-	obj_coords.Y() = y;
+	obj_coords.x() = 0;
+	obj_coords.y() = 0;
+}
+TransformComponent::TransformComponent(const double& x, const double& y, const unsigned int& h, const unsigned int& w)
+{
+	obj_coords.x() = x;
+	obj_coords.y() = y;
 	obj_size.h() = h;
 	obj_size.w() = w;
-	
 }
 
-TransformComponent::~TransformComponent(){}
+TransformComponent::~TransformComponent()
+{}
 
 Vector2D& TransformComponent::coords()
 {
@@ -43,6 +52,3 @@ Size& TransformComponent::size()
 {
 	return obj_size;
 }
-
-
-
