@@ -21,7 +21,8 @@ int main()
 
 	EntityManager manager;
 	Entity& object = manager.add_entity();
-	object.add_component<BoxComponent>(renderer, 100, 100, 0, 0);
+	object.add_component<TransformComponent>(100, 100, 100, 100);
+	object.add_component<BoxComponent>(renderer);
 
 	while (isWork)
 	{
@@ -40,6 +41,10 @@ int main()
 			if (event.type == SDL_QUIT)
 			{
 				isWork = false;
+			}
+			if (event.key.keysym.sym == SDLK_RIGHT)
+			{
+				object.get_component<TransformComponent>().coords().x() += 50;
 			}
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 			{
