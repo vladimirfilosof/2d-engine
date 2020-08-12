@@ -23,12 +23,14 @@ int main()
 	Entity& object = manager.add_entity();
 	object.add_component<TransformComponent>(100, 100, 100, 100);
 	object.add_component<BoxComponent>(renderer);
+	object.add_component<PhysicComponent>(&delta, 500, 500);
 
 	while (isWork)
 	{
 // Calculate delta time
 		diff = end - begin;
 		delta = diff.count();
+		begin = std::chrono::system_clock::now();
 
 // Clear renderer
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -38,23 +40,55 @@ int main()
 		manager.update();
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_QUIT)
+			if (event.type == SDL_KEYDOWN)
 			{
-				isWork = false;
+				switch (event.key.keysym.sym)
+				{
+					case SDLK_ESCAPE:
+						isWork = false;
+						break;
+					case SDLK_UP:
+						object.get_component<PhysicComponent>().direction().y() = -1;
+						break;
+					case SDLK_LEFT:
+						object.get_component<PhysicComponent>().direction().x() = -1;
+						break;
+					case SDLK_DOWN:
+						object.get_component<PhysicComponent>().direction().y() = 1;
+						break;
+					case SDLK_RIGHT:
+						object.get_component<PhysicComponent>().direction().x() = 1;
+						break;
+				}
 			}
-			if (event.key.keysym.sym == SDLK_RIGHT)
+			if (event.type == SDL_KEYUP)
 			{
-				object.get_component<TransformComponent>().coords().x() += 50;
+				switch (event.key.keysym.sym)
+				{
+					case SDLK_ESCAPE:
+						isWork = false;
+						break;
+					case SDLK_UP:
+						object.get_component<PhysicComponent>().direction().y() = 0;
+						break;
+					case SDLK_LEFT:
+						object.get_component<PhysicComponent>().direction().x() = 0;
+						break;
+					case SDLK_DOWN:
+						object.get_component<PhysicComponent>().direction().y() = 0;
+						break;
+					case SDLK_RIGHT:
+						object.get_component<PhysicComponent>().direction().x() = 0;
+						break;
+				}
 			}
-			if (event.key.keysym.sym == SDLK_ESCAPE)
-			{
-				isWork = false;
-			}
+
 		}
 
 		manager.draw();
 // Update renderer
 		SDL_RenderPresent(renderer);
+		end = std::chrono::system_clock::now();
 	}
 
 // Free memory

@@ -1,4 +1,2 @@
-1. Transorm component
-	That component describes entity coords and size
-2. Physic component
-	That component moves object and, mb, adds force to object
+1. ColliderComponent
+2. Collision handler
