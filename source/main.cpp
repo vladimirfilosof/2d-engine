@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "ECS/RenderSystem.h"
+#include "ECS/PhysicSystem.h"
 #include <chrono>
 
 int main()
@@ -24,13 +25,16 @@ int main()
 	Entity& object = manager.add_entity();
 	object.add_component<TransformComponent>(100, 100, 100, 100);
 	object.add_component<BoxComponent>();
+	object.add_component<PhysicComponent>(500, 500);
 
 	manager.add_system<RenderSystem>(renderer);
+	manager.add_system<PhysicSystem>(&delta);
 	while (isWork)
 	{
 // Calculate delta time
 		diff = end - begin;
 		delta = diff.count();
+		begin = std::chrono::system_clock::now();
 
 // Clear renderer
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -40,25 +44,54 @@ int main()
 		manager.update();
 		while (SDL_PollEvent(&event))
 		{
-			switch (event.key.keysym.sym)
+			if (event.type == SDL_KEYDOWN)
 			{
-				case SDLK_UP:
-					object.get_component<PhysicComponent>()
-					break;
-				case SDLK_LEFT:
-					break;
-				case SDLK_RIGHT:
-					break;
-				case SDLK_DOWN:
-					break;
-				case SDLK_ESCAPE:
-					isWork = false;
-					break;
+				switch (event.key.keysym.sym)
+				{
+					case SDLK_ESCAPE:
+						isWork = false;
+						break;
+					case SDLK_UP:
+						object.get_component<PhysicComponent>().direction().y() = -1;
+						break;
+					case SDLK_LEFT:
+						object.get_component<PhysicComponent>().direction().x() = -1;
+						break;
+					case SDLK_DOWN:
+						object.get_component<PhysicComponent>().direction().y() = 1;
+						break;
+					case SDLK_RIGHT:
+						object.get_component<PhysicComponent>().direction().x() = 1;
+						break;
+				}
 			}
+			if (event.type == SDL_KEYUP)
+			{
+				switch (event.key.keysym.sym)
+				{
+					case SDLK_ESCAPE:
+						isWork = false;
+						break;
+					case SDLK_UP:
+						object.get_component<PhysicComponent>().direction().y() = 0;
+						break;
+					case SDLK_LEFT:
+						object.get_component<PhysicComponent>().direction().x() = 0;
+						break;
+					case SDLK_DOWN:
+						object.get_component<PhysicComponent>().direction().y() = 0;
+						break;
+					case SDLK_RIGHT:
+						object.get_component<PhysicComponent>().direction().x() = 0;
+						break;
+				}
+			}
+
 		}
 
 // Update renderer
 		SDL_RenderPresent(renderer);
+		end = std::chrono::system_clock::now();
 	}
 
 // Free memory

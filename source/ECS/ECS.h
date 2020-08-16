@@ -58,7 +58,7 @@ public:
 	{
 		if (!has_component<T>())
 		{
-			std::cerr << "[Engine]: Component doesn't exist!" << std::endl;
+			std::cerr << "[Engine] <Entity>: Component doesn't exist!" << std::endl;
 			exit(1);
 		}
 		auto buf = components_array[get_typeID<T>()];
@@ -69,7 +69,7 @@ public:
 	{
 		if (has_component<T>())
 		{
-			std::cerr << "[Engine]: Component already exists!" << std::endl;
+			std::cerr << "[Engine] <Entity>: Component already exists!" << std::endl;
 			exit(1);
 		}
 		T* buf = new T(MArgs...);
