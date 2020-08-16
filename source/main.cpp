@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "ECS/RenderSystem.h"
 #include <chrono>
 
 int main()
@@ -22,8 +23,9 @@ int main()
 	EntityManager manager;
 	Entity& object = manager.add_entity();
 	object.add_component<TransformComponent>(100, 100, 100, 100);
-	object.add_component<BoxComponent>(renderer);
+	object.add_component<BoxComponent>();
 
+	manager.add_system<RenderSystem>(renderer);
 	while (isWork)
 	{
 // Calculate delta time
@@ -38,21 +40,23 @@ int main()
 		manager.update();
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_QUIT)
+			switch (event.key.keysym.sym)
 			{
-				isWork = false;
-			}
-			if (event.key.keysym.sym == SDLK_RIGHT)
-			{
-				object.get_component<TransformComponent>().coords().x() += 50;
-			}
-			if (event.key.keysym.sym == SDLK_ESCAPE)
-			{
-				isWork = false;
+				case SDLK_UP:
+					object.get_component<PhysicComponent>()
+					break;
+				case SDLK_LEFT:
+					break;
+				case SDLK_RIGHT:
+					break;
+				case SDLK_DOWN:
+					break;
+				case SDLK_ESCAPE:
+					isWork = false;
+					break;
 			}
 		}
 
-		manager.draw();
 // Update renderer
 		SDL_RenderPresent(renderer);
 	}
