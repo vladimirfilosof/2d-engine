@@ -1,8 +1,8 @@
 #ifndef TRANSFORMCOMPONENT_H
 #define TRANSFORMCOMPONENT_H
 
-#include "ECS.h"
-#include "../Vector2D.h"
+#include "../ECS.h"
+#include "../../Vector2D.h"
 
 class Size
 {

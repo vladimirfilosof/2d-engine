@@ -1,8 +1,8 @@
 #ifndef PHYSIC_H
 #define PHYSIC_H
 
-#include "ECS.h"
-#include "../Vector2D.h"
+#include "../ECS.h"
+#include "../../Vector2D.h"
 
 class PhysicComponent : public Component
 {

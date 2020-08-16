@@ -1,9 +1,9 @@
 #ifndef PHYSICSYSTEM_H
 #define PHYSICSYSTEM_H
 
-#include "ECS.h"
-#include "PhysicComponent.h"
-#include "TransformComponent.h"
+#include "../ECS.h"
+#include "../Components/PhysicComponent.h"
+#include "../Components/TransformComponent.h"
 #include <vector>
 #include <iostream>
 

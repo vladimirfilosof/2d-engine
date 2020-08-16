@@ -1,9 +1,9 @@
 #ifndef BOXCOMPONENT_H
 #define BOXCOMPONENT_H
 
-#include "ECS.h"
-#include "SDL2/SDL_rect.h"
-#include "SDL2/SDL_render.h"
+#include "../ECS.h"
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_render.h>
 
 class BoxComponent : public Component
 {
