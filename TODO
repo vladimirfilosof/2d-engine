@@ -1,2 +1,4 @@
-1. ColliderComponent
-2. Collision handler
+1. Add systems to ECS
+2. Add collision algorithms
+3. Add standart components and systems
+4. Add panels, buttons and e.t.c.
