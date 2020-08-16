@@ -1,4 +1,4 @@
-1. Transorm component
-	That component describes entity coords and size
-2. Physic component
-	That component moves object and, mb, adds force to object
+1. Add systems to ECS
+2. Add collision algorithms
+3. Add standart components and systems
+4. Add panels, buttons and e.t.c.
