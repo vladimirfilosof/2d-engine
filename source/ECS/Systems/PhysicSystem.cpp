@@ -12,7 +12,9 @@ void PhysicSystem::update()
 {
 	for (auto& item : entities)
 	{
-		item->get_component<TransformComponent>().coords().x() += item->get_component<PhysicComponent>().direction().x() * item->get_component<PhysicComponent>().speedX() * (*delta);
-		item->get_component<TransformComponent>().coords().y() += item->get_component<PhysicComponent>().direction().y() * item->get_component<PhysicComponent>().speedY() * (*delta);
+		if (item->has_component<TransformComponent>() && item->has_component<PhysicComponent>())
+		{
+			item->get_component<TransformComponent>().coords() += item->get_component<PhysicComponent>().direction() * item->get_component<PhysicComponent>().speed() * (*delta);
+		}
 	}
 }

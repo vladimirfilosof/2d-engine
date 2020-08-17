@@ -9,16 +9,15 @@ class PhysicComponent : public Component
 private:
 	Vector2D dir;
 
-	double speed_x;
-	double speed_y;
+	Vector2D sp;
 public:
 	PhysicComponent(const double& speed_x, const double& speed_y);
 	~PhysicComponent();
 
 	void init();
 
-	double& speedX(){return speed_x;}
-	double& speedY(){return speed_y;}
+	Vector2D& speed(){return sp;}
+
 	Vector2D& direction(){return dir;}
 };
 

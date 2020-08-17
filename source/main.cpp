@@ -1,8 +1,6 @@
 #include "Engine.h"
 #include "ECS/Components/Components.h"
 #include "ECS/Systems/Systems.h"
-#include "ECS/Systems/RenderSystem.h"
-#include "ECS/Systems/PhysicSystem.h"
 #include <SDL2/SDL.h>
 #include <chrono>
 
