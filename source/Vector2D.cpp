@@ -22,6 +22,18 @@ void Vector2D::zeroize()
 	ypos = 0;
 }
 
+double Vector2D::length()
+{
+	return sqrt(pow(xpos, 2) + pow(ypos, 2));
+}
+
+Vector2D& Vector2D::normalize()
+{
+	double len = length();
+	if (len != 0) *this /= len;
+	return *this;
+}
+
 Vector2D operator + (const Vector2D& first, const Vector2D& second)
 {
 	return Vector2D(first.xpos + second.xpos, first.ypos + second.ypos); 

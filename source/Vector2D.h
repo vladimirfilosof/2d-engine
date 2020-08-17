@@ -1,6 +1,9 @@
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
 
+#include <cmath>
+#include <iostream>
+
 class Vector2D
 {
 public:
@@ -10,6 +13,9 @@ public:
 	void zeroize ();
 	double& x();
 	double& y();
+
+	double length();
+	Vector2D& normalize();
 
 	friend Vector2D operator + (const Vector2D& first, const Vector2D& second);
 	friend Vector2D operator - (const Vector2D& first, const Vector2D& second);
