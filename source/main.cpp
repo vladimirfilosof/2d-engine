@@ -28,6 +28,10 @@ int main()
 	object.add_component<BoxComponent>();
 	object.add_component<PhysicComponent>(500, 500);
 
+	Entity& test = manager.add_entity();
+	test.add_component<TransformComponent>(0, 0, 10, 10);
+	test.add_component<BoxComponent>();
+
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<PhysicSystem>(&delta);
 	while (isWork)

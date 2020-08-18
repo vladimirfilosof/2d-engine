@@ -1,18 +1,21 @@
 #ifndef ECS_H
 #define ECS_H
 
-#include <iostream>
+#include <stdexcept>
 #include <vector>
 #include <array>
 #include <bitset>
 
+// Max components quantity that you can create
 #define MAX_COMPONENTS 32
+// Max systems quantity that you can create
 #define MAX_SYSTEMS 32
 
 class Component;
 class Entity;
 class System;
 class EntityManager;
+
 
 class Component
 {
@@ -22,6 +25,16 @@ public:
 
 	virtual ~Component(){}
 	virtual void init(){}
+};
+
+class System
+{
+private:
+public:
+	EntityManager* manager;
+
+	virtual ~System(){}
+	virtual void update(){}
 };
 
 class Entity
@@ -58,8 +71,7 @@ public:
 	{
 		if (!has_component<T>())
 		{
-			std::cerr << "[Engine] <Entity>: Component doesn't exist!" << std::endl;
-			exit(1);
+			throw std::runtime_error("[Entity] <get_component>: Component doesn't exist!");
 		}
 		auto buf = components_array[get_typeID<T>()];
 		return *static_cast<T*>(buf);
@@ -69,9 +81,9 @@ public:
 	{
 		if (has_component<T>())
 		{
-			std::cerr << "[Engine] <Entity>: Component already exists!" << std::endl;
-			exit(1);
+			throw std::runtime_error("[Entity] <add_component>: Component already exists!");
 		}
+
 		T* buf = new T(MArgs...);
 		components.push_back(buf);
 		components_array[get_typeID<T>()] = buf;
@@ -80,16 +92,6 @@ public:
 		buf->init();
 		return *buf;
 	}
-};
-
-class System
-{
-private:
-public:
-	EntityManager* manager;
-
-	virtual ~System(){}
-	virtual void update(){}
 };
 
 class EntityManager
@@ -133,8 +135,7 @@ public:
 	{
 		if (!has_system<T>())
 		{
-			std::cerr << "[Engine] <EntityManager>: System doesn't exist!" << std::endl;
-			exit(1);
+			throw std::runtime_error ("[Manager] <get_system>: System doesn't exist!");
 		}
 		auto buf = systems_array[get_typeID<T>()];
 		return *static_cast<T*>(buf);
@@ -145,7 +146,7 @@ public:
 	{
 		if (has_system<T>())
 		{
-			std::cerr << "[Engine] <EntityManager>: System already exists!" << std::endl;
+			throw std::runtime_error("[Manager] <add_system>: System already exists!");
 			exit(1);
 		}
 		T* buf = new T(MArgs...);
