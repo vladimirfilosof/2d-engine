@@ -1,6 +1,31 @@
 #ifndef ECS_H
 #define ECS_H
 
+/* 
+ *	This header contains classes that are required for realizing
+ *	"Entity Component System". It includes Component, System, 
+ *	Entity and Manager classes.
+ *
+ *	Component class is abstract class that is required for creating 
+ *	your own components. Inherit it and describe properties that you need.
+ *	Component class contains encapsulated properties of object. For 
+ *	example TransformComponent contains size and position of object.
+ *
+ * 	System class is abstract class that is required for creating your
+ * 	own systems. As in component you need inherit it and then overload update
+ * 	function.
+ * 	System class is required for updating components' properties. For example 
+ * 	PhysicSystem updates the object position
+ *
+ * Entity contains components. You can use add_component function to add 
+ * new one. Function has_component returns true if component exists in 
+ * this entity. Function get_component returns reference to component
+ *	
+ * Manager contains all entities and systems. Use add_entity to create new one.
+ * Function add_system add new system to manager. Get and has functions are 
+ * the same as functions in Entity.
+ */
+
 #include <stdexcept>
 #include <vector>
 #include <array>
@@ -15,7 +40,6 @@ class Component;
 class Entity;
 class System;
 class EntityManager;
-
 
 class Component
 {
