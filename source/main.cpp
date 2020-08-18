@@ -68,6 +68,18 @@ int main()
 					case SDLK_RIGHT:
 						object.get_component<PhysicComponent>().direction().x() = 1;
 						break;
+					case SDLK_RETURN:
+						if (object.has_component<BoxComponent>())
+						{
+							object.remove_component<BoxComponent>();
+						}
+						break;
+					case SDLK_SPACE:
+						if (!object.has_component<BoxComponent>())
+						{
+							object.add_component<BoxComponent>();
+						}
+						break;
 				}
 			}
 			if (event.type == SDL_KEYUP)

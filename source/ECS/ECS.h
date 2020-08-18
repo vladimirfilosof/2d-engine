@@ -30,6 +30,7 @@
 #include <vector>
 #include <array>
 #include <bitset>
+#include <algorithm>
 
 // Max components quantity that you can create
 #define MAX_COMPONENTS 32
@@ -115,6 +116,18 @@ public:
 		buf->entity = this;
 		buf->init();
 		return *buf;
+	}
+	template<typename T>
+	void remove_component()
+	{
+		if (!has_component<T>())
+		{
+			throw std::runtime_error("[Entity] <remove_component>: Component doesn't exist!");
+		}
+		components.erase(std::remove(components.begin(), components.end(), components_array[get_typeID<T>()]), components.end());
+		components_bitset[get_typeID<T>()] = false;
+		delete components_array[get_typeID<T>()];
+		components_array[get_typeID<T>()] = nullptr;
 	}
 };
 
