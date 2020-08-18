@@ -7,6 +7,7 @@
 #include <bitset>
 
 #define MAX_COMPONENTS 32
+#define MAX_SYSTEMS 32
 
 class Component;
 class Entity;
@@ -47,7 +48,6 @@ public:
 	Entity();
 	~Entity();
 
-	
 	template<typename T>
 	bool has_component()
 	{
@@ -97,8 +97,8 @@ class EntityManager
 private:
 	std::vector<Entity*> entities;
 	std::vector<System*> systems;
-	std::array<System*, 32> systems_array;
-	std::bitset<32> systems_bitset;
+	std::array<System*, MAX_SYSTEMS> systems_array;
+	std::bitset<MAX_SYSTEMS> systems_bitset;
 	
 // ID manager for systems
 	inline std::size_t get_newID()
