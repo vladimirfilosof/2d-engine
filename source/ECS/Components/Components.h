@@ -4,5 +4,6 @@
 #include "TransformComponent.h"
 #include "PhysicComponent.h"
 #include "ColorComponent.h"
+#include "ColliderComponent.h"
 
 #endif
