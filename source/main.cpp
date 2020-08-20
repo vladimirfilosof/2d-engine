@@ -25,12 +25,11 @@ int main()
 	EntityManager manager;
 	Entity& object = manager.add_entity();
 	object.add_component<TransformComponent>(100, 100, 100, 100);
-	object.add_component<BoxComponent>();
+	object.add_component<ColorComponent>(255, 0, 0, 0);
 	object.add_component<PhysicComponent>(500, 500);
 
 	Entity& test = manager.add_entity();
 	test.add_component<TransformComponent>(0, 0, 10, 10);
-	test.add_component<BoxComponent>();
 
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<PhysicSystem>(&delta);
@@ -67,18 +66,6 @@ int main()
 						break;
 					case SDLK_RIGHT:
 						object.get_component<PhysicComponent>().direction().x() = 1;
-						break;
-					case SDLK_RETURN:
-						if (object.has_component<BoxComponent>())
-						{
-							object.remove_component<BoxComponent>();
-						}
-						break;
-					case SDLK_SPACE:
-						if (!object.has_component<BoxComponent>())
-						{
-							object.add_component<BoxComponent>();
-						}
 						break;
 				}
 			}
