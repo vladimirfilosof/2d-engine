@@ -3,5 +3,6 @@
 
 #include "RenderSystem.h"
 #include "PhysicSystem.h"
+#include "CollisionSystem.h"
 
 #endif

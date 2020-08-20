@@ -25,6 +25,7 @@ public:
 	TransformComponent(const double& x, const double& y, const unsigned int& h, const unsigned int& w);
 	Vector2D& coords();
 	Size& size();
+
 private:
 	Vector2D obj_coords;
 	Size obj_size;

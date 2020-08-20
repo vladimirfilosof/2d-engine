@@ -8,7 +8,7 @@ int main()
 {
 // Initialize SDL, creating window and renderer
 	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window* window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 300, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN);
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 // This variable responsible for exiting the program
@@ -24,14 +24,17 @@ int main()
 
 	EntityManager manager;
 	Entity& object = manager.add_entity();
-	object.add_component<TransformComponent>(100, 100, 100, 100);
+	object.add_component<TransformComponent>(600, 600, 100, 100);
+	object.add_component<ColliderComponent>();
 	object.add_component<ColorComponent>(255, 0, 0, 0);
 	object.add_component<PhysicComponent>(500, 500);
 
 	Entity& test = manager.add_entity();
-	test.add_component<TransformComponent>(0, 0, 10, 10);
+	test.add_component<TransformComponent>(100, 100, 80, 80);
+	test.add_component<ColliderComponent>();
 
 	manager.add_system<RenderSystem>(renderer);
+	manager.add_system<CollisionSystem>();
 	manager.add_system<PhysicSystem>(&delta);
 	while (isWork)
 	{
