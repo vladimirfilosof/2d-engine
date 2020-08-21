@@ -1,3 +1,8 @@
-1. Add collision algorithms
-2. Add standart components and systems
-3. Add panels, buttons and e.t.c.
+1. Add standart components and systems
+	1) ColliderComponent - add tag, collision info and add opportunity of adding rectangle
+	2) RenderComponent (or another name) - component for render rectangle
+	3) SpriteComponent - animation, textures and e.t.c
+	4) ...
+2. Revise realization of System
+3. Add isAcitve to Component properties
+2. Add panels, buttons and e.t.c.
