@@ -24,10 +24,10 @@ bool Collision::AABB(TransformComponent& tc1, TransformComponent& tc2)
 
 void Collision::ConvertToSDL(TransformComponent& tc, SDL_Rect& r)
 {
-	r.h = tc.size().w();
-	r.w = tc.size().h();
-	r.x = tc.coords().x();
-	r.y = tc.coords().y();
+	r.h = static_cast<int> (tc.size().w());
+	r.w = static_cast<int> (tc.size().h());
+	r.x = static_cast<int> (tc.coords().x());
+	r.y = static_cast<int> (tc.coords().y());
 }
 
 
