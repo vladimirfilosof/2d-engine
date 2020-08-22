@@ -10,13 +10,11 @@
 class PhysicSystem : public System
 {
 private:
-	std::vector<Entity*> entities;
 	double* delta;
 public:
 	PhysicSystem(double* d) : delta(d){}
 	~PhysicSystem();
 
-	void init();
 	void update();
 };
 

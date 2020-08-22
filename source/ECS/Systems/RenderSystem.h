@@ -12,11 +12,10 @@ class RenderSystem : public System
 {
 private:
 	SDL_Renderer* renderer;
-	std::vector<Entity*> entities;
 public:
 	RenderSystem(SDL_Renderer* renderer);
 	~RenderSystem();
-	void init();
+
 	void update();
 };
 

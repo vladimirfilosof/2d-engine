@@ -11,12 +11,10 @@
 class CollisionSystem : public System
 {
 private:
-	std::vector<Entity*> entities;
 public:
 	CollisionSystem();
 	~CollisionSystem();
 
-	void init();
 	void update();
 };
 

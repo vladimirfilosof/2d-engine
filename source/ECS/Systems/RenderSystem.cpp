@@ -8,11 +8,6 @@ RenderSystem::~RenderSystem()
 {
 }
 
-void RenderSystem::init()
-{
-	entities = manager->get_entities();
-}
-
 void RenderSystem::update()
 {
 	SDL_Rect rect;

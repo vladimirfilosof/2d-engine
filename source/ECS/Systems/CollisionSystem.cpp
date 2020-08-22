@@ -8,11 +8,6 @@ CollisionSystem::~CollisionSystem()
 {
 }
 
-void CollisionSystem::init()
-{
-	entities = manager->get_entities();
-}
-
 void CollisionSystem::update()
 {
 	for (unsigned register int i = 0 ; i < entities.size() - 1 ; i++)

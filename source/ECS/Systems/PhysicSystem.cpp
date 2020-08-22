@@ -3,11 +3,6 @@
 PhysicSystem::~PhysicSystem()
 {}
 
-void PhysicSystem::init()
-{
-	entities = manager->get_entities();
-}
-
 void PhysicSystem::update()
 {
 	for (auto& item : entities)

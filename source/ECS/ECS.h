@@ -55,11 +55,14 @@ public:
 class System
 {
 private:
+protected:
+	std::vector<Entity*> entities;
 public:
 	EntityManager* manager;
 
 	virtual ~System(){}
 	virtual void update(){}
+	virtual void init();
 };
 
 class Entity

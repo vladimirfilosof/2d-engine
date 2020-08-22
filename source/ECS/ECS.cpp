@@ -12,9 +12,15 @@ Entity::~Entity()
 	}
 }
 
+void System::init()
+{
+	entities = manager->get_entities();
+}
+
 EntityManager::EntityManager()
 {
 }
+
 EntityManager::~EntityManager()
 {
 	for (auto& item : entities)
