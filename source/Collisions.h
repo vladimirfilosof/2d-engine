@@ -10,7 +10,6 @@ private:
 public:
 	static bool AABB(const SDL_Rect& r1, const SDL_Rect& r2);
 	static bool AABB(TransformComponent& tc1, TransformComponent& tc2);
-	static void ConvertToSDL(TransformComponent& tc, SDL_Rect& r);
 };
 
 #endif

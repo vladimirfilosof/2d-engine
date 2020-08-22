@@ -2,6 +2,7 @@
 #define TRANSFORMCOMPONENT_H
 
 #include "../ECS.h"
+#include <SDL2/SDL_rect.h>
 #include "../../Vector2D.h"
 
 class Size
@@ -26,6 +27,7 @@ public:
 	Vector2D& coords();
 	Size& size();
 
+	SDL_Rect get_rect();
 private:
 	Vector2D obj_coords;
 	Size obj_size;

@@ -12,22 +12,5 @@ bool Collision::AABB(const SDL_Rect& r1, const SDL_Rect& r2)
 
 bool Collision::AABB(TransformComponent& tc1, TransformComponent& tc2)
 {
-	
-	SDL_Rect r1;
-	SDL_Rect r2;
-
-	ConvertToSDL(tc1, r1);
-	ConvertToSDL(tc2, r2);
-
-	return AABB(r1, r2);
+	return AABB(tc1.get_rect(), tc2.get_rect());
 }
-
-void Collision::ConvertToSDL(TransformComponent& tc, SDL_Rect& r)
-{
-	r.h = static_cast<int> (tc.size().w());
-	r.w = static_cast<int> (tc.size().h());
-	r.x = static_cast<int> (tc.coords().x());
-	r.y = static_cast<int> (tc.coords().y());
-}
-
-

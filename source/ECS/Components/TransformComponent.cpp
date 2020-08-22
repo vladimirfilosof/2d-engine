@@ -52,3 +52,13 @@ Size& TransformComponent::size()
 {
 	return obj_size;
 }
+
+SDL_Rect TransformComponent::get_rect()
+{
+	SDL_Rect rect;
+	rect.w = static_cast<int>(obj_size.w());
+	rect.h = static_cast<int>(obj_size.h());
+	rect.x = static_cast<int>(obj_coords.x());
+	rect.y = static_cast<int>(obj_coords.y());
+	return rect;
+}
