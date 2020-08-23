@@ -5,5 +5,6 @@
 #include "PhysicComponent.h"
 #include "ColorComponent.h"
 #include "ColliderComponent.h"
+#include "SpriteComponent.h"
 
 #endif
