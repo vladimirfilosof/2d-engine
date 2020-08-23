@@ -29,8 +29,8 @@ int main()
 	object.add_component<ColorComponent>(255, 0, 0, 0);
 	object.add_component<PhysicComponent>(500, 500);
 	object.add_component<SpriteComponent>(renderer);
-	object.get_component<SpriteComponent>().add_animation("../textures/dino_peace.png", 0, 1);
-	object.get_component<SpriteComponent>().add_animation("../textures/dino_run.png", 0.2, 2);
+	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
+	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
 
 	Entity& test = manager.add_entity();
 	test.add_component<TransformComponent>(100, 100, 80, 80);
