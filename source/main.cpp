@@ -34,7 +34,7 @@ int main()
 	test.add_component<ColliderComponent>("Test");
 
 	manager.add_system<RenderSystem>(renderer);
-	manager.add_system<CollisionSystem>();
+	manager.add_system<CollisionSystem>(&delta);
 	manager.add_system<PhysicSystem>(&delta);
 	while (isWork)
 	{

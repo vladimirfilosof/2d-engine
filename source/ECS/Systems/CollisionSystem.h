@@ -12,8 +12,9 @@
 class CollisionSystem : public System
 {
 private:
+	double* delta;
 public:
-	CollisionSystem();
+	CollisionSystem(double* d) : delta(d){};
 	~CollisionSystem();
 
 	void update();
