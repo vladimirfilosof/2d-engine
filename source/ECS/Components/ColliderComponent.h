@@ -23,6 +23,6 @@ public:
 	bool right = false;
 	bool left = false;
 	bool top = false;
-	bool down = false;
+	bool bottom	= false;
 };
 #endif

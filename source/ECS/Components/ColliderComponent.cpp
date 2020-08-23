@@ -29,6 +29,10 @@ void ColliderComponent::zeroize()
 {
 	x_axis = false;
 	y_axis = false;
+	top = false;
+	bottom = false;
+	left = false;
+	right = false;
 }
 
 

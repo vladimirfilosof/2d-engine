@@ -13,6 +13,7 @@ class CollisionSystem : public System
 {
 private:
 	double* delta;
+	void next_step(Entity* entity, PhysicComponent*& pc, TransformComponent& Dtc_x, TransformComponent& Dtc_y);
 public:
 	CollisionSystem(double* d) : delta(d){};
 	~CollisionSystem();
