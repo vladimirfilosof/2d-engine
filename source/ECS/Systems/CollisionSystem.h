@@ -7,6 +7,7 @@
 #include "../Components/ColliderComponent.h"
 #include "../../Collisions.h"
 #include <iostream>
+#include <SDL2/SDL_rect.h>
 
 class CollisionSystem : public System
 {
@@ -16,6 +17,7 @@ public:
 	~CollisionSystem();
 
 	void update();
+	virtual void handling_collision(Entity* e1, Entity* e2);
 };
 
 #endif
