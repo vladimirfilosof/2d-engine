@@ -24,6 +24,8 @@ private:
 	int size;
 	SDL_Rect rect;
 	bool isLocked;
+	SDL_RendererFlip fp;
+	double ang;
 
 	std::chrono::system_clock::time_point begin;
 	std::chrono::system_clock::time_point end;
@@ -43,6 +45,10 @@ public:
 	bool isAnimation(){return size == 0 ? false : true;}
 
 	SDL_Rect& get_rect(){return rect;}
+
+	SDL_RendererFlip& flip(){return fp;}
+
+	double& angle(){return ang;}
 
 	SDL_Texture* get_texture(){return isAnimation() ? animation[current_animation].texture : nullptr;}
 

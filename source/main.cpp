@@ -75,12 +75,14 @@ int main()
 						break;
 					case SDLK_LEFT:
 						object.get_component<PhysicComponent>().direction().x() = -1;
+						object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
 						break;
 					case SDLK_DOWN:
 						object.get_component<PhysicComponent>().direction().y() = 1;
 						break;
 					case SDLK_RIGHT:
 						object.get_component<PhysicComponent>().direction().x() = 1;
+						object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
 						break;
 				}
 			}

@@ -25,6 +25,10 @@ void SpriteComponent::init()
 	current_animation = 0;
 	isLocked = false;
 
+	fp = SDL_FLIP_NONE;
+
+	ang = 0;
+
 	begin = std::chrono::system_clock::now();
 }
 

@@ -24,7 +24,7 @@ void RenderSystem::update()
 				SDL_Point center;
 				center.x = rect.x + rect.w / 2;
 				center.y = rect.y + rect.h / 2;
-				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, 0, &center, SDL_FLIP_NONE);
+				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, sprite.angle(), &center, sprite.flip());
 			}
 
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
