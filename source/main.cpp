@@ -63,52 +63,38 @@ int main()
 		}
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_KEYDOWN)
-			{
-				switch (event.key.keysym.sym)
-				{
-					case SDLK_ESCAPE:
-						isWork = false;
-						break;
-					case SDLK_UP:
-						object.get_component<PhysicComponent>().direction().y() = -1;
-						break;
-					case SDLK_LEFT:
-						object.get_component<PhysicComponent>().direction().x() = -1;
-						object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
-						break;
-					case SDLK_DOWN:
-						object.get_component<PhysicComponent>().direction().y() = 1;
-						break;
-					case SDLK_RIGHT:
-						object.get_component<PhysicComponent>().direction().x() = 1;
-						object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
-						break;
-				}
-			}
-			if (event.type == SDL_KEYUP)
-			{
-				switch (event.key.keysym.sym)
-				{
-					case SDLK_ESCAPE:
-						isWork = false;
-						break;
-					case SDLK_UP:
-						object.get_component<PhysicComponent>().direction().y() = 0;
-						break;
-					case SDLK_LEFT:
-						object.get_component<PhysicComponent>().direction().x() = 0;
-						break;
-					case SDLK_DOWN:
-						object.get_component<PhysicComponent>().direction().y() = 0;
-						break;
-					case SDLK_RIGHT:
-						object.get_component<PhysicComponent>().direction().x() = 0;
-						break;
-				}
-			}
-
 		}
+		const Uint8* state = SDL_GetKeyboardState(NULL);
+
+		if (state[SDL_SCANCODE_UP])
+		{
+			object.get_component<PhysicComponent>().direction().y() = -1;
+		}
+		else if (state[SDL_SCANCODE_DOWN])
+		{
+			object.get_component<PhysicComponent>().direction().y() = 1;
+		}
+		else
+		{
+			object.get_component<PhysicComponent>().direction().y() = 0;
+		}
+
+		if (state[SDL_SCANCODE_RIGHT])
+		{
+			object.get_component<PhysicComponent>().direction().x() = 1;
+			object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
+		}
+		else if (state[SDL_SCANCODE_LEFT])
+		{
+			object.get_component<PhysicComponent>().direction().x() = -1;
+			object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
+		}
+		else
+		{
+			object.get_component<PhysicComponent>().direction().x() = 0;
+		}
+
+		if (state[SDL_SCANCODE_ESCAPE]) isWork = false;
 
 // Update renderer
 		SDL_RenderPresent(renderer);
