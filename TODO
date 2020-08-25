@@ -1,7 +1,7 @@
 1. Add standart components and systems
-	1) ColliderComponent - add tag, collision info and add opportunity of adding rectangle
-	2) RenderComponent (or another name) - component for render rectangle
-	3) SpriteComponent - animation, textures and e.t.c
-	4) ...
+	1) ColliderComponent - opportunity of adding rectangle
+	2) BoxComponent
+	3) InventoryComponent
+	5) ...
 2. Add isAcitve to Component properties
 3. Add panels, buttons and e.t.c.
