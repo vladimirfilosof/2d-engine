@@ -25,16 +25,26 @@ int main()
 	EntityManager manager;
 	Entity& object = manager.add_entity();
 	object.add_component<TransformComponent>(600, 600, 100, 100);
-	object.add_component<ColliderComponent>("Just rect");
-	object.add_component<ColorComponent>(255, 0, 0, 0);
+	object.add_component<ColliderComponent>("Player");
+	object.add_component<ColorComponent>(0, 0, 255, 0);
 	object.add_component<PhysicComponent>(500, 500);
 	object.add_component<SpriteComponent>(renderer);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
 
-	Entity& test = manager.add_entity();
-	test.add_component<TransformComponent>(100, 100, 80, 80);
-	test.add_component<ColliderComponent>("Test");
+	Entity& wall = manager.add_entity();
+	wall.add_component<TransformComponent>(100, 100, 80, 80);
+	wall.add_component<ColliderComponent>("Wall");
+
+	Entity& inc_area = manager.add_entity();
+	inc_area.add_component<TransformComponent>(0, 700, 100, 100);
+	inc_area.add_component<ColorComponent>(0, 255, 0, 0);
+	inc_area.add_component<ColliderComponent>("inc_area");
+
+	Entity& dec_area = manager.add_entity();
+	dec_area.add_component<TransformComponent>(700, 700, 100, 100);
+	dec_area.add_component<ColorComponent>(255, 0, 0, 0);
+	dec_area.add_component<ColliderComponent>("dec_area");
 
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<CollisionSystem>(&delta);
@@ -82,12 +92,12 @@ int main()
 		if (state[SDL_SCANCODE_RIGHT])
 		{
 			object.get_component<PhysicComponent>().direction().x() = 1;
-			object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
+			object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
 		}
 		else if (state[SDL_SCANCODE_LEFT])
 		{
 			object.get_component<PhysicComponent>().direction().x() = -1;
-			object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
+			object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
 		}
 		else
 		{
