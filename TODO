@@ -1,6 +1,5 @@
 1. Add standart components and systems
-	1) ColliderComponent - opportunity of adding rectangle. Opportunity of adding
-	new collision events and hadlers for them.
+	1) ColliderComponent - opportunity of adding rectangle. 
 	2) BoxComponent - turn on drawing rectangle
 	3) InventoryComponent
 	5) ...
