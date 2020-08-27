@@ -31,6 +31,37 @@ int main()
 	object.add_component<SpriteComponent>(renderer);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
+	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
+			{
+				if (e1->get_component<TransformComponent>().size().w() < 300)
+				{
+					e1->get_component<TransformComponent>().size().w()++;
+					e1->get_component<TransformComponent>().size().h()++;
+					e1->get_component<TransformComponent>().coords().x()--;
+					e1->get_component<TransformComponent>().coords().y()--;
+				}
+			});
+	object.get_component<ColliderComponent>().add_collisionEvent("dec_area",[](Entity* e1, Entity* e2)
+			{
+				if (e1->get_component<TransformComponent>().size().w() > 100)
+				{
+					e1->get_component<TransformComponent>().size().w()--;
+					e1->get_component<TransformComponent>().size().h()--;
+					e1->get_component<TransformComponent>().coords().x()++;
+					e1->get_component<TransformComponent>().coords().y()++;
+				}
+			});
+	object.get_component<ColliderComponent>().add_collisionEvent("Wall",[](Entity* e1, Entity* e2)
+			{
+				if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
+				if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
+			});
+	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
+			{
+				e1->get_component<SpriteComponent>().angle() += 20;
+			});
+
+
 
 	Entity& wall = manager.add_entity();
 	wall.add_component<TransformComponent>(100, 100, 80, 80);
@@ -45,6 +76,11 @@ int main()
 	dec_area.add_component<TransformComponent>(700, 700, 100, 100);
 	dec_area.add_component<ColorComponent>(255, 0, 0, 0);
 	dec_area.add_component<ColliderComponent>("dec_area");
+
+	Entity& rotate_area = manager.add_entity();
+	rotate_area.add_component<TransformComponent>(350,350,100,100);
+	rotate_area.add_component<ColorComponent>(255, 255, 0, 0);
+	rotate_area.add_component<ColliderComponent>("rotate_area");
 
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<CollisionSystem>(&delta);

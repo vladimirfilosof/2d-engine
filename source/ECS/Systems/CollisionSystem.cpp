@@ -98,95 +98,18 @@ void CollisionSystem::update()
 						}
 					}
 
-					handling_collision(entities[i], entities[j]);
+				//	handling_collision(entities[i], entities[j]);
+					
+					if (cc1.x_axis || cc1.y_axis) 
+					{
+						cc1.update(cc2.Tag(), entities[j]);
+						cc2.update(cc1.Tag(), entities[i]);
+					}
 
 					// zeroize collision result for next step
 					entities[i]->get_component<ColliderComponent>().zeroize();
 					entities[j]->get_component<ColliderComponent>().zeroize();
 
-				}
-			}
-		}
-	}
-}
-
-void CollisionSystem::handling_collision(Entity* e1, Entity* e2)
-{
-	ColliderComponent& cc1 = e1->get_component<ColliderComponent>();
-	ColliderComponent& cc2 = e2->get_component<ColliderComponent>();
-
-	PhysicComponent* pc1 = nullptr;
-	PhysicComponent* pc2 = nullptr;
-	
-	if (cc1.x_axis || cc1.y_axis)
-	{
-		if (cc1.Tag() == "inc_area")
-		{
-			if (e2->get_component<TransformComponent>().size().w() < 300)
-			{
-				e2->get_component<TransformComponent>().size().w()++;
-				e2->get_component<TransformComponent>().size().h()++;
-				e2->get_component<TransformComponent>().coords().x()--;
-				e2->get_component<TransformComponent>().coords().y()--;
-			}
-		}
-		else if (cc2.Tag() == "inc_area")
-		{
-			if (e1->get_component<TransformComponent>().size().w() < 300)
-			{
-				e1->get_component<TransformComponent>().size().w()++;
-				e1->get_component<TransformComponent>().size().h()++;
-				e1->get_component<TransformComponent>().coords().x()--;
-				e1->get_component<TransformComponent>().coords().y()--;
-			}
-		}	
-		else if (cc1.Tag() == "dec_area")
-		{
-			if (e2->get_component<TransformComponent>().size().w() > 100)
-			{
-				e2->get_component<TransformComponent>().size().w()--;
-				e2->get_component<TransformComponent>().size().h()--;
-				e2->get_component<TransformComponent>().coords().x()++;
-				e2->get_component<TransformComponent>().coords().y()++;
-			}
-		}
-		else if (cc2.Tag() == "dec_area")
-		{
-			if (e1->get_component<TransformComponent>().size().w() > 100)
-			{
-				e1->get_component<TransformComponent>().size().w()--;
-				e1->get_component<TransformComponent>().size().h()--;
-				e1->get_component<TransformComponent>().coords().x()++;
-				e1->get_component<TransformComponent>().coords().y()++;
-			}
-		}	
-		else 
-		{
-			if (e1->has_component<PhysicComponent>())
-			{
-				pc1 = &e1->get_component<PhysicComponent>();
-				if (cc1.x_axis)
-				{
-					pc1->direction().x() = 0;
-				}
-		
-				if (cc1.y_axis)
-				{
-					pc1->direction().y() = 0;
-				}
-			}
-
-			if (e2->has_component<PhysicComponent>())
-			{
-				pc2 = &e1->get_component<PhysicComponent>();
-				if (cc2.x_axis)
-				{
-					pc2->direction().x() = 0;
-				}
-		
-				if (cc2.y_axis)
-				{
-					pc2->direction().y() = 0;
 				}
 			}
 		}

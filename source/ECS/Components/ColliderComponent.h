@@ -4,19 +4,23 @@
 #include "../ECS.h"
 #include <string>
 #include <SDL2/SDL_rect.h>
+#include <map>
 
 class ColliderComponent : public Component
 {
 private:
 	std::string tag;
-
+	std::map<std::string, void(*)(Entity*, Entity*)> event_list;
 public:
 	ColliderComponent(std::string tag);
 	~ColliderComponent();
 	void init();
 	std::string& Tag();
-	void collision(SDL_Rect r1, SDL_Rect r2);
 	void zeroize();
+
+	void update(const std::string& str, Entity* en2);
+
+	void add_collisionEvent(const std::string& str, void(*)(Entity*, Entity*));
 
 	bool x_axis = false;
 	bool y_axis = false;

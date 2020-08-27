@@ -22,9 +22,9 @@ void RenderSystem::update()
 				SpriteComponent& sprite = item->get_component<SpriteComponent>();
 				sprite.update();
 				SDL_Point center;
-				center.x = rect.x + rect.w / 2;
-				center.y = rect.y + rect.h / 2;
-				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, sprite.angle(), &center, sprite.flip());
+				center.x = rect.w / 2;
+				center.y = rect.h / 2;
+				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, sprite.angle() * 0.0176, &center, sprite.flip());
 			}
 
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);

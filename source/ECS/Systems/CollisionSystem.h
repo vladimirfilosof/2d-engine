@@ -19,7 +19,6 @@ public:
 	~CollisionSystem();
 
 	void update();
-	virtual void handling_collision(Entity* e1, Entity* e2);
 };
 
 #endif

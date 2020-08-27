@@ -20,9 +20,17 @@ std::string& ColliderComponent::Tag()
 	return tag;
 }
 
-void ColliderComponent::collision(SDL_Rect r1, SDL_Rect r2)
+void ColliderComponent::update(const std::string& tag, Entity* ent2)
 {
-	std::cout << "Collision" << std::endl;
+	if (event_list.find(tag) != event_list.end())
+	{	
+		event_list[tag](entity, ent2);
+	}
+}
+
+void ColliderComponent::add_collisionEvent(const std::string& str, void(*buf)(Entity*, Entity*))
+{
+	event_list[str] = buf;
 }
 
 void ColliderComponent::zeroize()
