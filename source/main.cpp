@@ -85,6 +85,7 @@ int main()
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<CollisionSystem>(&delta);
 	manager.add_system<PhysicSystem>(&delta);
+	manager.add_system<CameraSystem>(&object, 800, 800);
 	while (isWork)
 	{
 // Calculate delta time
