@@ -27,13 +27,16 @@ void RenderSystem::update()
 				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, sprite.angle() * 0.0176, &center, sprite.flip());
 			}
 
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
-			if (item->has_component<ColorComponent>())
+			if (item->has_component<BoxComponent>())
 			{
-				ColorComponent& color = item->get_component<ColorComponent>();
-				SDL_SetRenderDrawColor(renderer, color.r(),color.g(), color.b(), color.a());
+				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+				if (item->has_component<ColorComponent>())
+				{
+					ColorComponent& color = item->get_component<ColorComponent>();
+					SDL_SetRenderDrawColor(renderer, color.r(),color.g(), color.b(), color.a());
+				}
+				SDL_RenderDrawRect(renderer, &rect);
 			}
-			SDL_RenderDrawRect(renderer, &rect);
 		}
 	}
 }

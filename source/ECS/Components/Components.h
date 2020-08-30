@@ -6,5 +6,6 @@
 #include "ColorComponent.h"
 #include "ColliderComponent.h"
 #include "SpriteComponent.h"
+#include "BoxComponent.h"
 
 #endif

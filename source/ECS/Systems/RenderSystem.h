@@ -5,6 +5,7 @@
 #include "../Components/ColorComponent.h"
 #include "../Components/SpriteComponent.h"
 #include "../Components/TransformComponent.h"
+#include "../Components/BoxComponent.h"
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_rect.h>
 #include <vector>

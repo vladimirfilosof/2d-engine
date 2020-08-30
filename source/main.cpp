@@ -72,26 +72,31 @@ int main()
 
 	Entity& wall = manager.add_entity();
 	wall.add_component<TransformComponent>(100, 100, 80, 80);
+	wall.add_component<BoxComponent>();
 	wall.add_component<ColliderComponent>("Wall");
 
 	Entity& inc_area = manager.add_entity();
 	inc_area.add_component<TransformComponent>(0, 700, 100, 100);
 	inc_area.add_component<ColorComponent>(0, 255, 0, 0);
+	inc_area.add_component<BoxComponent>();
 	inc_area.add_component<ColliderComponent>("inc_area");
 
 	Entity& dec_area = manager.add_entity();
 	dec_area.add_component<TransformComponent>(700, 700, 100, 100);
 	dec_area.add_component<ColorComponent>(255, 0, 0, 0);
+	dec_area.add_component<BoxComponent>();
 	dec_area.add_component<ColliderComponent>("dec_area");
 
 	Entity& rotate_area = manager.add_entity();
 	rotate_area.add_component<TransformComponent>(350,350,100,100);
 	rotate_area.add_component<ColorComponent>(255, 255, 0, 0);
+	rotate_area.add_component<BoxComponent>();
 	rotate_area.add_component<ColliderComponent>("rotate_area");
 
 	Entity& run_area = manager.add_entity();
 	run_area.add_component<TransformComponent>(-100, -100, 50, 50);
 	run_area.add_component<ColorComponent>(0, 255, 255, 0);
+	run_area.add_component<BoxComponent>();
 	run_area.add_component<ColliderComponent>("run_area");
 
 	manager.add_system<RenderSystem>(renderer);
