@@ -16,6 +16,8 @@ int main()
 
 	SDL_Event event;
 
+	srand(time(NULL));
+
 // Some variables for delta_time calculating
 	std::chrono::system_clock::time_point begin = std::chrono::system_clock::now();
 	std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
@@ -60,6 +62,11 @@ int main()
 			{
 				e1->get_component<SpriteComponent>().angle() += 20;
 			});
+	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)
+			{
+				e2->get_component<TransformComponent>().coords().x() = rand()%800;
+				e2->get_component<TransformComponent>().coords().y() = rand()%800;
+			});
 
 
 
@@ -82,10 +89,16 @@ int main()
 	rotate_area.add_component<ColorComponent>(255, 255, 0, 0);
 	rotate_area.add_component<ColliderComponent>("rotate_area");
 
+	Entity& run_area = manager.add_entity();
+	run_area.add_component<TransformComponent>(-100, -100, 50, 50);
+	run_area.add_component<ColorComponent>(0, 255, 255, 0);
+	run_area.add_component<ColliderComponent>("run_area");
+
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<CollisionSystem>(&delta);
 	manager.add_system<PhysicSystem>(&delta);
 	manager.add_system<CameraSystem>(&object, 800, 800);
+
 	while (isWork)
 	{
 // Calculate delta time

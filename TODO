@@ -2,6 +2,6 @@
 	1) ColliderComponent - opportunity of adding rectangle. 
 	2) BoxComponent - turn on drawing rectangle
 	3) InventoryComponent
-	5) ...
+	5) ItemComponent
 2. Add isAcitve to Component properties
 3. Add panels, buttons and e.t.c.
