@@ -1,7 +1,8 @@
 1. Add standart components and systems
 	1) ColliderComponent - opportunity of adding rectangle. 
-	2) BoxComponent - turn on drawing rectangle
-	3) InventoryComponent
-	5) ItemComponent
+	2) InventoryComponent
+	3) ItemComponent
+	4) LightComponent
+	5) LightSystem
 2. Add isAcitve to Component properties
 3. Add panels, buttons and e.t.c.
