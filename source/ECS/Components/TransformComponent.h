@@ -10,12 +10,12 @@ class Size
 public:
 	Size();
 	~Size();
-	Size(const unsigned int& height, const unsigned int& width);
-	unsigned int& h();
-	unsigned int& w();
+	Size(const double& height, const double& width);
+	double& h();
+	double& w();
 private:
-	unsigned int height = 0;
-	unsigned int width = 0;
+	double height = 0;
+	double width = 0;
 };
 
 class TransformComponent : public Component
@@ -23,7 +23,7 @@ class TransformComponent : public Component
 public:
 	TransformComponent();
 	~TransformComponent();
-	TransformComponent(const double& x, const double& y, const unsigned int& h, const unsigned int& w);
+	TransformComponent(const double& x, const double& y, const double& h, const double& w);
 	Vector2D& coords();
 	Size& size();
 

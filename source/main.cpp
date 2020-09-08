@@ -37,8 +37,8 @@ int main()
 			{
 				if (e1->get_component<TransformComponent>().size().w() < 300)
 				{
-					e1->get_component<TransformComponent>().size().w() += 100 * *delta;
-					e1->get_component<TransformComponent>().size().h() += 100 * *delta;
+					e1->get_component<TransformComponent>().size().w() += 200 * *delta;
+					e1->get_component<TransformComponent>().size().h() += 200 * *delta;
 					e1->get_component<TransformComponent>().coords().x() -= 50 * *delta;
 					e1->get_component<TransformComponent>().coords().y() -= 50 * *delta;
 				}
@@ -47,8 +47,8 @@ int main()
 			{
 				if (e1->get_component<TransformComponent>().size().w() > 100)
 				{
-					e1->get_component<TransformComponent>().size().w() -= 100 * *delta;
-					e1->get_component<TransformComponent>().size().h() -= 100 * *delta;
+					e1->get_component<TransformComponent>().size().w() -= 200 * *delta;
+					e1->get_component<TransformComponent>().size().h() -= 200 * *delta;
 					e1->get_component<TransformComponent>().coords().x() += 50 * *delta;
 					e1->get_component<TransformComponent>().coords().y() += 50 * *delta;
 				}
@@ -60,7 +60,7 @@ int main()
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2, double* delta)
 			{
-				e1->get_component<SpriteComponent>().angle() += 180 * *delta;
+				e1->get_component<SpriteComponent>().angle()++;
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2, double* delta)
 			{

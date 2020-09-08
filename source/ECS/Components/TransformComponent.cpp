@@ -6,7 +6,7 @@ Size::Size()
 	height = 0;
 	width = 0;
 }
-Size::Size(const unsigned int& height, const unsigned int& width)
+Size::Size(const double& height, const double& width)
 {
 	this->height = height;
 	this->width = width;
@@ -15,12 +15,12 @@ Size::Size(const unsigned int& height, const unsigned int& width)
 Size::~Size()
 {}
 
-unsigned int& Size::h()
+double& Size::h()
 {
 	return height;
 }
 
-unsigned int& Size::w()
+double& Size::w()
 {
 	return width;
 }
@@ -32,7 +32,7 @@ TransformComponent::TransformComponent()
 	obj_coords.x() = 0;
 	obj_coords.y() = 0;
 }
-TransformComponent::TransformComponent(const double& x, const double& y, const unsigned int& h, const unsigned int& w)
+TransformComponent::TransformComponent(const double& x, const double& y, const double& h, const double& w)
 {
 	obj_coords.x() = x;
 	obj_coords.y() = y;
