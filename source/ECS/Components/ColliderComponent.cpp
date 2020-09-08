@@ -20,7 +20,7 @@ std::string& ColliderComponent::Tag()
 	return tag;
 }
 
-void ColliderComponent::update(const std::string& tag, Entity* ent2, const double* deltaTime)
+void ColliderComponent::update(const std::string& tag, Entity* ent2, double* deltaTime)
 {
 	if (event_list.find(tag) != event_list.end())
 	{	
@@ -28,7 +28,7 @@ void ColliderComponent::update(const std::string& tag, Entity* ent2, const doubl
 	}
 }
 
-void ColliderComponent::add_collisionEvent(const std::string& str, void(*buf)(Entity*, Entity*, const double* delta))
+void ColliderComponent::add_collisionEvent(const std::string& str, void(*buf)(Entity*, Entity*, double* ))
 {
 	event_list[str] = buf;
 }

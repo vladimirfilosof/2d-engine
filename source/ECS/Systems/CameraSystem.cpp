@@ -21,3 +21,8 @@ void CameraSystem::update()
 		item->get_component<TransformComponent>().coords().y() -= ypos;
 	}
 }
+
+void CameraSystem::change_focus(Entity* new_focus)
+{
+	focus = new_focus;
+}
