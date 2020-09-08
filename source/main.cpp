@@ -33,7 +33,7 @@ int main()
 	object.add_component<SpriteComponent>(renderer);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
-	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
+	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2, const double* delta)
 			{
 				if (e1->get_component<TransformComponent>().size().w() < 300)
 				{
@@ -43,7 +43,7 @@ int main()
 					e1->get_component<TransformComponent>().coords().y()--;
 				}
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("dec_area",[](Entity* e1, Entity* e2)
+	object.get_component<ColliderComponent>().add_collisionEvent("dec_area",[](Entity* e1, Entity* e2, const double* delta)
 			{
 				if (e1->get_component<TransformComponent>().size().w() > 100)
 				{
@@ -53,16 +53,16 @@ int main()
 					e1->get_component<TransformComponent>().coords().y()++;
 				}
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("Wall",[](Entity* e1, Entity* e2)
+	object.get_component<ColliderComponent>().add_collisionEvent("Wall",[](Entity* e1, Entity* e2, const double* delta)
 			{
 				if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
 				if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
+	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2, const double* delta)
 			{
 				e1->get_component<SpriteComponent>().angle() += 20;
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)
+	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2, const double* delta)
 			{
 				e2->get_component<TransformComponent>().coords().x() = rand()%800;
 				e2->get_component<TransformComponent>().coords().y() = rand()%800;

@@ -102,8 +102,8 @@ void CollisionSystem::update()
 					
 					if (cc1.x_axis || cc1.y_axis) 
 					{
-						cc1.update(cc2.Tag(), entities[j]);
-						cc2.update(cc1.Tag(), entities[i]);
+						cc1.update(cc2.Tag(), entities[j], delta);
+						cc2.update(cc1.Tag(), entities[i], delta);
 					}
 
 					// zeroize collision result for next step

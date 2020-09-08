@@ -10,7 +10,7 @@ class ColliderComponent : public Component
 {
 private:
 	std::string tag;
-	std::map<std::string, void(*)(Entity*, Entity*)> event_list;
+	std::map<std::string, void(*)(Entity*, Entity*, const double*)> event_list;
 public:
 	ColliderComponent(std::string tag);
 	~ColliderComponent();
@@ -18,9 +18,9 @@ public:
 	std::string& Tag();
 	void zeroize();
 
-	void update(const std::string& str, Entity* en2);
+	void update(const std::string& str, Entity* en2, const double* deltaTime);
 
-	void add_collisionEvent(const std::string& str, void(*)(Entity*, Entity*));
+	void add_collisionEvent(const std::string& str, void(*)(Entity*, Entity*, const double*));
 
 	bool x_axis = false;
 	bool y_axis = false;
