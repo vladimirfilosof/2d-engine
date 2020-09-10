@@ -1,8 +1,5 @@
 #include "Engine.h"
-#include "ECS/Components/Components.h"
-#include "ECS/Systems/Systems.h"
 #include <SDL2/SDL.h>
-#include "DeltaTime.h"
 
 int main()
 {
