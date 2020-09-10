@@ -1,7 +1,12 @@
 #include "PhysicSystem.h"
 
+PhysicSystem::PhysicSystem()
+{
+}
+
 PhysicSystem::~PhysicSystem()
-{}
+{
+}
 
 void PhysicSystem::update()
 {
@@ -11,7 +16,7 @@ void PhysicSystem::update()
 		{
 			PhysicComponent& pc = item->get_component<PhysicComponent>();
 			pc.direction().normalize();
-			item->get_component<TransformComponent>().coords() += pc.direction() * pc.speed() * (*delta);
+			item->get_component<TransformComponent>().coords() += pc.direction() * pc.speed() * DeltaTime::delta;
 		}
 	}
 }

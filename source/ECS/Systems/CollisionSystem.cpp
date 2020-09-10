@@ -1,5 +1,9 @@
 #include "CollisionSystem.h"
 
+CollisionSystem::CollisionSystem()
+{
+}
+
 CollisionSystem::~CollisionSystem()
 {
 }
@@ -102,8 +106,8 @@ void CollisionSystem::update()
 					
 					if (cc1.x_axis || cc1.y_axis) 
 					{
-						cc1.update(cc2.Tag(), entities[j], delta);
-						cc2.update(cc1.Tag(), entities[i], delta);
+						cc1.update(cc2.Tag(), entities[j]);
+						cc2.update(cc1.Tag(), entities[i]);
 					}
 
 					// zeroize collision result for next step
@@ -121,8 +125,8 @@ void CollisionSystem::next_step(Entity* entity, PhysicComponent*& pc, TransformC
 	if (entity->has_component<PhysicComponent>())
 	{
 		pc = &entity->get_component<PhysicComponent>();
-		Dtc_x.coords().x() += pc->direction().x() * pc->speed().x() * (*delta);
-		Dtc_y.coords().y() += pc->direction().y() * pc->speed().y() * (*delta);
+		Dtc_x.coords().x() += pc->direction().x() * pc->speed().x() * DeltaTime::delta;
+		Dtc_y.coords().y() += pc->direction().y() * pc->speed().y() * DeltaTime::delta;
 	}
 }
 

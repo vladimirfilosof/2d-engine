@@ -6,13 +6,13 @@
 #include "../Components/TransformComponent.h"
 #include <vector>
 #include <iostream>
+#include "../../DeltaTime.h"
 
 class PhysicSystem : public System
 {
 private:
-	double* delta;
 public:
-	PhysicSystem(double* d) : delta(d){}
+	PhysicSystem();
 	~PhysicSystem();
 
 	void update();

@@ -2,7 +2,6 @@
 #include "ECS/Components/Components.h"
 #include "ECS/Systems/Systems.h"
 #include <SDL2/SDL.h>
-#include <chrono>
 #include "DeltaTime.h"
 
 int main()
@@ -19,12 +18,7 @@ int main()
 
 	srand(time(NULL));
 
-// Some variables for delta_time calculating
-	std::chrono::system_clock::time_point begin = std::chrono::system_clock::now();
-	std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
-	std::chrono::duration<double> diff;
-	double delta;
-
+// Class for calculating delta time 
 	DeltaTime dt;
 
 	EntityManager manager;
@@ -36,37 +30,36 @@ int main()
 	object.add_component<SpriteComponent>(renderer);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
-	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2, double* delta)
+	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
 			{
 				if (e1->get_component<TransformComponent>().size().w() < 300)
 				{
-					e1->get_component<TransformComponent>().size().w() += 200 * *delta;
-					e1->get_component<TransformComponent>().size().h() += 200 * *delta;
-					e1->get_component<TransformComponent>().coords().x() -= 50 * *delta;
-					e1->get_component<TransformComponent>().coords().y() -= 50 * *delta;
+					e1->get_component<TransformComponent>().size().w() += 200 * DeltaTime::delta;
+					e1->get_component<TransformComponent>().size().h() += 200 * DeltaTime::delta;
+					e1->get_component<TransformComponent>().coords().x() -= 50 * DeltaTime::delta;
+					e1->get_component<TransformComponent>().coords().y() -= 50 * DeltaTime::delta;
 				}
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("dec_area",[](Entity* e1, Entity* e2, double* delta)
+	object.get_component<ColliderComponent>().add_collisionEvent("dec_area",[](Entity* e1, Entity* e2)
 			{
 				if (e1->get_component<TransformComponent>().size().w() > 100)
 				{
-					e1->get_component<TransformComponent>().size().w() -= 200 * *delta;
-					e1->get_component<TransformComponent>().size().h() -= 200 * *delta;
-					e1->get_component<TransformComponent>().coords().x() += 50 * *delta;
-					e1->get_component<TransformComponent>().coords().y() += 50 * *delta;
+					e1->get_component<TransformComponent>().size().w() -= 200 * DeltaTime::delta;
+					e1->get_component<TransformComponent>().size().h() -= 200 * DeltaTime::delta;
+					e1->get_component<TransformComponent>().coords().x() += 50 * DeltaTime::delta;
+					e1->get_component<TransformComponent>().coords().y() += 50 * DeltaTime::delta;
 				}
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("Wall",[](Entity* e1, Entity* e2, double* delta)
+	object.get_component<ColliderComponent>().add_collisionEvent("Wall",[](Entity* e1, Entity* e2)
 			{
 				if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
 				if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
-				std::cout << "%" << DeltaTime::delta << std::endl;
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2, double* delta)
+	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
 			{
 				e1->get_component<SpriteComponent>().angle()++;
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2, double* delta)
+	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)
 			{
 				e2->get_component<TransformComponent>().coords().x() = rand()%800;
 				e2->get_component<TransformComponent>().coords().y() = rand()%800;
@@ -104,17 +97,14 @@ int main()
 	run_area.add_component<ColliderComponent>("run_area");
 
 	manager.add_system<RenderSystem>(renderer);
-	manager.add_system<CollisionSystem>(&delta);
-	manager.add_system<PhysicSystem>(&delta);
+	manager.add_system<CollisionSystem>();
+	manager.add_system<PhysicSystem>();
 	manager.add_system<CameraSystem>(&object, 800, 800);
 
 	while (isWork)
 	{
-		dt.begin();
 // Calculate delta time
-		diff = end - begin;
-		delta = diff.count();
-		begin = std::chrono::system_clock::now();
+		dt.begin();
 
 // Clear renderer
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -168,7 +158,6 @@ int main()
 
 // Update renderer
 		SDL_RenderPresent(renderer);
-		end = std::chrono::system_clock::now();
 
 		dt.end();
 	}
