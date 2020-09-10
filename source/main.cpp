@@ -3,6 +3,7 @@
 #include "ECS/Systems/Systems.h"
 #include <SDL2/SDL.h>
 #include <chrono>
+#include "DeltaTime.h"
 
 int main()
 {
@@ -23,6 +24,8 @@ int main()
 	std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
 	std::chrono::duration<double> diff;
 	double delta;
+
+	DeltaTime dt;
 
 	EntityManager manager;
 	Entity& object = manager.add_entity();
@@ -57,6 +60,7 @@ int main()
 			{
 				if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
 				if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
+				std::cout << "%" << DeltaTime::delta << std::endl;
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2, double* delta)
 			{
@@ -106,6 +110,7 @@ int main()
 
 	while (isWork)
 	{
+		dt.begin();
 // Calculate delta time
 		diff = end - begin;
 		delta = diff.count();
@@ -164,6 +169,8 @@ int main()
 // Update renderer
 		SDL_RenderPresent(renderer);
 		end = std::chrono::system_clock::now();
+
+		dt.end();
 	}
 
 // Free memory
