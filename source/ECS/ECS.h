@@ -99,7 +99,7 @@ public:
 	{
 		if (!has_component<T>())
 		{
-			throw std::runtime_error("[Entity] <get_component>: Component doesn't exist!");
+			throw std::runtime_error("[Entity] <get_component>: Component doesn't exist! Component ID: " + std::to_string(get_typeID<T>()));
 		}
 		auto buf = components_array[get_typeID<T>()];
 		return *static_cast<T*>(buf);
@@ -109,7 +109,7 @@ public:
 	{
 		if (has_component<T>())
 		{
-			throw std::runtime_error("[Entity] <add_component>: Component already exists!");
+			throw std::runtime_error("[Entity] <add_component>: Component already exists! Component ID: " + std::to_string(get_typeID<T>()));
 		}
 
 		T* buf = new T(MArgs...);
@@ -125,7 +125,7 @@ public:
 	{
 		if (!has_component<T>())
 		{
-			throw std::runtime_error("[Entity] <remove_component>: Component doesn't exist!");
+			throw std::runtime_error("[Entity] <remove_component>: Component doesn't exist! Component ID: " + std::to_string(get_typeID<T>()));
 		}
 		components.erase(std::remove(components.begin(), components.end(), components_array[get_typeID<T>()]), components.end());
 		components_bitset[get_typeID<T>()] = false;
@@ -175,7 +175,7 @@ public:
 	{
 		if (!has_system<T>())
 		{
-			throw std::runtime_error ("[Manager] <get_system>: System doesn't exist!");
+			throw std::runtime_error ("[Manager] <get_system>: System doesn't exist! System ID: " + std::to_string(get_typeID<T>()));
 		}
 		auto buf = systems_array[get_typeID<T>()];
 		return *static_cast<T*>(buf);
@@ -186,7 +186,7 @@ public:
 	{
 		if (has_system<T>())
 		{
-			throw std::runtime_error("[Manager] <add_system>: System already exists!");
+			throw std::runtime_error("[Manager] <add_system>: System already exists! System ID: " + std::to_string(get_typeID<T>()));
 			exit(1);
 		}
 		T* buf = new T(MArgs...);
