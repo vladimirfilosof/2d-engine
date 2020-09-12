@@ -5,5 +5,6 @@
 #include "PhysicSystem.h"
 #include "CollisionSystem.h"
 #include "CameraSystem.h"
+#include "LifeSystem.h"
 
 #endif

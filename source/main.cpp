@@ -108,6 +108,7 @@ int main()
 	manager.add_system<CollisionSystem>();
 	manager.add_system<PhysicSystem>();
 	manager.add_system<CameraSystem>(&object, 800, 800);
+	manager.add_system<LifeSystem>();
 
 	while (isWork)
 	{
