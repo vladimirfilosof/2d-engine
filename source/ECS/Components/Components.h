@@ -7,5 +7,6 @@
 #include "ColliderComponent.h"
 #include "SpriteComponent.h"
 #include "BoxComponent.h"
+#include "HealthComponent.h"
 
 #endif

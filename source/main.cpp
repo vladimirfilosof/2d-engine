@@ -25,6 +25,7 @@ int main()
 	object.add_component<ColorComponent>(0, 0, 255, 0);
 	object.add_component<PhysicComponent>(500, 500);
 	object.add_component<SpriteComponent>(renderer);
+	object.add_component<HealthComponent>(10);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
 	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
@@ -54,14 +55,18 @@ int main()
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
 			{
-				e1->get_component<SpriteComponent>().angle()++;
+				e1->get_component<SpriteComponent>().angle() += 360;
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)
 			{
 				e2->get_component<TransformComponent>().coords().x() = rand()%800;
 				e2->get_component<TransformComponent>().coords().y() = rand()%800;
 			});
-
+	object.get_component<ColliderComponent>().add_collisionEvent("damage_area", [](Entity* e1, Entity* e2)
+			{
+				e1->get_component<HealthComponent>().add_damage(1);
+				std::cout << e1->get_component<HealthComponent>().health() << std::endl;
+			});
 
 
 	Entity& wall = manager.add_entity();
@@ -92,6 +97,12 @@ int main()
 	run_area.add_component<ColorComponent>(0, 255, 255, 0);
 	run_area.add_component<BoxComponent>();
 	run_area.add_component<ColliderComponent>("run_area");
+
+	Entity& damage_area = manager.add_entity();
+	damage_area.add_component<TransformComponent>(-100, 0, 100, 100);
+	damage_area.add_component<ColorComponent>(255, 0, 255, 0);
+	damage_area.add_component<BoxComponent>();
+	damage_area.add_component<ColliderComponent>("damage_area");
 
 	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<CollisionSystem>();
