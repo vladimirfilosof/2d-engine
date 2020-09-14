@@ -122,7 +122,6 @@ int main()
 	damage_area.add_component<BoxComponent>();
 	damage_area.add_component<ColliderComponent>("damage_area");
 
-	manager.add_system<RenderSystem>(renderer);
 	manager.add_system<CollisionSystem>();
 	manager.add_system<PhysicSystem>();
 	manager.add_system<CameraSystem>(&object, 800, 800);
@@ -139,15 +138,12 @@ int main()
 					}
 				}
 			});
+	manager.add_system<RenderSystem>(renderer);
 
 	while (isWork)
 	{
 // Calculate delta time
 		dt.begin();
-
-// Clear renderer
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-		SDL_RenderClear(renderer);
 
 // Check events
 		manager.update();
@@ -197,9 +193,6 @@ int main()
 		}
 
 		if (state[SDL_SCANCODE_ESCAPE]) isWork = false;
-
-// Update renderer
-		SDL_RenderPresent(renderer);
 
 		dt.end();
 	}

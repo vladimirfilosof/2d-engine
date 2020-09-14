@@ -14,6 +14,8 @@ void RenderSystem::update()
 #ifdef DEBUG
 	std::cout << "[DEBUG]: RenderSystem begin" << std::endl;
 #endif
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderClear(renderer);
 	SDL_Rect rect;
 	for (auto& item : entities)
 	{
@@ -43,6 +45,7 @@ void RenderSystem::update()
 			}
 		}
 	}
+	SDL_RenderPresent(renderer);
 #ifdef DEBUG
 	std::cout << "[DEBUG]: RenderSystem end" << std::endl;
 #endif
