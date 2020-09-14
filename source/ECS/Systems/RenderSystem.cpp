@@ -1,4 +1,5 @@
 #include "RenderSystem.h"
+#include "iostream"
 
 RenderSystem::RenderSystem(SDL_Renderer* renderer)
 {
@@ -10,6 +11,9 @@ RenderSystem::~RenderSystem()
 
 void RenderSystem::update()
 {
+#ifdef DEBUG
+	std::cout << "[DEBUG]: RenderSystem begin" << std::endl;
+#endif
 	SDL_Rect rect;
 	for (auto& item : entities)
 	{
@@ -39,4 +43,8 @@ void RenderSystem::update()
 			}
 		}
 	}
+#ifdef DEBUG
+	std::cout << "[DEBUG]: RenderSystem end" << std::endl;
+#endif
+
 }

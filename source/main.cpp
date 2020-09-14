@@ -30,42 +30,59 @@ int main()
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
 	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
 			{
-				if (e1->get_component<TransformComponent>().size().w() < 300)
+				if (e1->has_component<TransformComponent>())
 				{
-					e1->get_component<TransformComponent>().size().w() += 200 * DeltaTime::delta;
-					e1->get_component<TransformComponent>().size().h() += 200 * DeltaTime::delta;
-					e1->get_component<TransformComponent>().coords().x() -= 50 * DeltaTime::delta;
-					e1->get_component<TransformComponent>().coords().y() -= 50 * DeltaTime::delta;
+					if (e1->get_component<TransformComponent>().size().w() < 300)
+					{
+						e1->get_component<TransformComponent>().size().w() += 200 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().size().h() += 200 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().coords().x() -= 50 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().coords().y() -= 50 * DeltaTime::delta;
+					}
 				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("dec_area",[](Entity* e1, Entity* e2)
 			{
-				if (e1->get_component<TransformComponent>().size().w() > 100)
+				if (e1->has_component<TransformComponent>())
 				{
-					e1->get_component<TransformComponent>().size().w() -= 200 * DeltaTime::delta;
-					e1->get_component<TransformComponent>().size().h() -= 200 * DeltaTime::delta;
-					e1->get_component<TransformComponent>().coords().x() += 50 * DeltaTime::delta;
-					e1->get_component<TransformComponent>().coords().y() += 50 * DeltaTime::delta;
+					if (e1->get_component<TransformComponent>().size().w() > 100)
+					{
+						e1->get_component<TransformComponent>().size().w() -= 200 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().size().h() -= 200 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().coords().x() += 50 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().coords().y() += 50 * DeltaTime::delta;
+					}
 				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("Wall",[](Entity* e1, Entity* e2)
 			{
-				if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
-				if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
+				if (e1->has_component<ColliderComponent>() && e1->has_component<PhysicComponent>())
+				{
+					if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
+					if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
+				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
 			{
-				e1->get_component<SpriteComponent>().angle() += 360;
+				if (e1->has_component<SpriteComponent>())
+				{
+					e1->get_component<SpriteComponent>().angle() += 360;
+				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)
 			{
-				e2->get_component<TransformComponent>().coords().x() = rand()%800;
-				e2->get_component<TransformComponent>().coords().y() = rand()%800;
+				if (e2->has_component<TransformComponent>())
+				{
+					e2->get_component<TransformComponent>().coords().x() = rand()%800;
+					e2->get_component<TransformComponent>().coords().y() = rand()%800;
+				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("damage_area", [](Entity* e1, Entity* e2)
 			{
-				e1->get_component<HealthComponent>().add_damage(1);
-				std::cout << e1->get_component<HealthComponent>().health() << std::endl;
+				if (e1->has_component<HealthComponent>())
+				{
+					e1->get_component<HealthComponent>().add_damage(2);
+				}
 			});
 
 
@@ -122,13 +139,16 @@ int main()
 // Check events
 		manager.update();
 
-		if (object.get_component<PhysicComponent>().direction().x() != 0 || object.get_component<PhysicComponent>().direction().y() != 0)
+		if (object.has_component<SpriteComponent>())	
 		{
-			object.get_component<SpriteComponent>().set_animation(1, false);
-		}
-		else
-		{
-			object.get_component<SpriteComponent>().set_animation(0, false);
+			if (object.get_component<PhysicComponent>().direction().x() != 0 || object.get_component<PhysicComponent>().direction().y() != 0)
+			{
+				object.get_component<SpriteComponent>().set_animation(1, false);
+			}
+			else
+			{
+				object.get_component<SpriteComponent>().set_animation(0, false);
+			}
 		}
 		while (SDL_PollEvent(&event))
 		{
@@ -151,12 +171,12 @@ int main()
 		if (state[SDL_SCANCODE_RIGHT])
 		{
 			object.get_component<PhysicComponent>().direction().x() = 1;
-			object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
+			if (object.has_component<SpriteComponent>()) object.get_component<SpriteComponent>().flip() = SDL_FLIP_NONE;
 		}
 		else if (state[SDL_SCANCODE_LEFT])
 		{
 			object.get_component<PhysicComponent>().direction().x() = -1;
-			object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
+			if (object.has_component<SpriteComponent>()) object.get_component<SpriteComponent>().flip() = SDL_FLIP_HORIZONTAL;
 		}
 		else
 		{

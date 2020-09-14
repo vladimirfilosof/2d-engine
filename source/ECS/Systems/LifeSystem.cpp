@@ -10,6 +10,11 @@ LifeSystem::~LifeSystem()
 
 void LifeSystem::update()
 {
+#ifdef DEBUG
+	std::cout << "[DEBUG]: LifeSystem begin" << std::endl;
+#endif
+
+
 	for (auto& entity : entities)
 	{
 		if (entity->has_component<HealthComponent>())
@@ -20,4 +25,8 @@ void LifeSystem::update()
 			}
 		}
 	}
+#ifdef DEBUG
+	std::cout << "[DEBUG]: LifeSystem end" << std::endl;
+#endif
+
 }

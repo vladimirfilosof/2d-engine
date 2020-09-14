@@ -21,7 +21,7 @@ LDFLAGS := -g
 # Libs (ex: -lm, -lncurses, -lSDL2)
 LIBS := -lSDL2 -lSDL2_image
 # Defines (ex: -D DEBUG, -Dcount=5)
-DEF :=
+DEF := -D DEBUG 
 # Directories with source code (ex: source)
 DIR := source source/ECS source/ECS/Components source/ECS/Systems
 
@@ -45,14 +45,14 @@ OBJ_FILES:=$(notdir $(patsubst %$(LANG), %.o, $(FILES)))
 VPATH:=$(SRC)
 
 all: $(OBJ_FILES) 
-	$(CC) $^ $(DEF) $(LIBS) $(LDFLAGS) -o $(NAME)
+	$(CC) $^ $(LIBS) $(LDFLAGS) -o $(NAME)
 
 static_library: $(filter-out main.o, $(OBJ_FILES))
 	ar cr lib$(NAME).a $^
 
 # Creating object files
 %.o: %$(LANG)
-	$(CC) -c $(CFLAGS) -MD $<
+	$(CC) -c $(CFLAGS) $(DEF) -MD $<
 
 clean:
 	rm -rf *.o *d $(NAME)

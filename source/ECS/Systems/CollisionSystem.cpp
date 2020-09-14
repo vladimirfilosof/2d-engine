@@ -10,6 +10,9 @@ CollisionSystem::~CollisionSystem()
 
 void CollisionSystem::update()
 {
+#ifdef DEBUG
+	std::cout << "[DEBUG]: CollisionSystem begin" << std::endl;
+#endif
 	for (unsigned register int i = 0 ; i < entities.size() - 1 ; i++)
 	{
 		if (entities[i]->has_component<ColliderComponent>())
@@ -118,6 +121,9 @@ void CollisionSystem::update()
 			}
 		}
 	}
+#ifdef DEBUG
+	std::cout << "[DEBUG]: CollisionSystem end" << std::endl;
+#endif
 }
 
 void CollisionSystem::next_step(Entity* entity, PhysicComponent*& pc, TransformComponent& Dtc_x, TransformComponent& Dtc_y)
