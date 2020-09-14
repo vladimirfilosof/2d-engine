@@ -81,7 +81,8 @@ int main()
 			{
 				if (e1->has_component<HealthComponent>())
 				{
-					e1->get_component<HealthComponent>().add_damage(2);
+					e1->get_component<HealthComponent>().add_damage(10);
+					std::cout << e1->get_component<HealthComponent>().health() << std::endl;
 				}
 			});
 
@@ -125,7 +126,19 @@ int main()
 	manager.add_system<CollisionSystem>();
 	manager.add_system<PhysicSystem>();
 	manager.add_system<CameraSystem>(&object, 800, 800);
-	manager.add_system<LifeSystem>();
+	manager.add_system<LifeSystem>([](Entity* entity)
+			{
+				if (entity->has_component<HealthComponent>())
+				{
+					if (entity->get_component<HealthComponent>().health() <= 0)
+					{
+						if (entity->has_component<SpriteComponent>())
+						{
+							entity->remove_component<SpriteComponent>();
+						}
+					}
+				}
+			});
 
 	while (isWork)
 	{
