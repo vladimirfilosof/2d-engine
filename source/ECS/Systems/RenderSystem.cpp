@@ -6,7 +6,9 @@ SDL_Renderer* RenderSystem::renderer = nullptr;
 RenderSystem::RenderSystem()
 {
 	window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN);
+	if (window == NULL) throw std::runtime_error("[RenderSystem] <RenderSystem>: window creating error");
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if (renderer == NULL) throw std::runtime_error("[RenderSystem] <RenderSystem>: renderer creating error");
 }
 RenderSystem::~RenderSystem()
 {
@@ -44,7 +46,7 @@ void RenderSystem::update()
 				if (item->has_component<ColorComponent>())
 				{
 					ColorComponent& color = item->get_component<ColorComponent>();
-					SDL_SetRenderDrawColor(renderer, color.r(),color.g(), color.b(), color.a());
+					SDL_SetRenderDrawColor(renderer, color.r(), color.g(), color.b(), color.a());
 				}
 				SDL_RenderDrawRect(renderer, &rect);
 			}
