@@ -56,6 +56,7 @@ Vector2D operator * (const Vector2D& vector, const double& num)
 
 Vector2D operator / (const Vector2D& vector, const double& num)
 {
+	if (num == 0) throw std::runtime_error("[Vector2D] <operator />: division by zero!");
 	return Vector2D (vector.xpos / num, vector.ypos / num);
 }
 
@@ -82,6 +83,7 @@ Vector2D& Vector2D::operator *= (const double& num)
 
 Vector2D& Vector2D::operator /= (const double& num)
 {
+	if (num == 0) throw std::runtime_error("[Vector2D] <operator />: division by zero!");
 	xpos /= num;
 	ypos /= num;
 	return *this;
