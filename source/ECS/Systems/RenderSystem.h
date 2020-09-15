@@ -6,16 +6,16 @@
 #include "../Components/SpriteComponent.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/BoxComponent.h"
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL.h>
 #include <vector>
 
 class RenderSystem : public System
 {
 private:
-	SDL_Renderer* renderer;
+	SDL_Window* window;
 public:
-	RenderSystem(SDL_Renderer* renderer);
+	static SDL_Renderer* renderer;
+	RenderSystem();
 	~RenderSystem();
 
 	void update();

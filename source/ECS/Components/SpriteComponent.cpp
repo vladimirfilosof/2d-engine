@@ -1,8 +1,8 @@
 #include "SpriteComponent.h"
+#include "../Systems/RenderSystem.h"
 
-SpriteComponent::SpriteComponent(SDL_Renderer* renderer)
+SpriteComponent::SpriteComponent()
 {
-	this->renderer = renderer;
 }
 
 SpriteComponent::~SpriteComponent()
@@ -74,7 +74,8 @@ void SpriteComponent::add_animation(const char* texture_path, const double& SPF,
 	animation[size - 1].width = surf->w;
 	animation[size - 1].height = surf->h;
 	animation[size - 1].SPF = SPF;
-	animation[size - 1].texture = SDL_CreateTextureFromSurface(renderer, surf);
+	if (RenderSystem::renderer == nullptr) throw std::runtime_error("[SpriteComponent] <add_animation>: renderer is not initializing");
+	animation[size - 1].texture = SDL_CreateTextureFromSurface(RenderSystem::renderer, surf);
 	SDL_FreeSurface(surf);
 }
 

@@ -5,8 +5,6 @@ int main()
 {
 // Initialize SDL, creating window and renderer
 	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window* window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 // This variable responsible for exiting the program
 	bool isWork = true;
@@ -20,11 +18,66 @@ int main()
 
 	EntityManager manager;
 	Entity& object = manager.add_entity();
+	
+
+	Entity& wall = manager.add_entity();
+	wall.add_component<TransformComponent>(100, 100, 80, 80);
+	wall.add_component<BoxComponent>();
+	wall.add_component<ColliderComponent>("Wall");
+
+	Entity& inc_area = manager.add_entity();
+	inc_area.add_component<TransformComponent>(0, 700, 100, 100);
+	inc_area.add_component<ColorComponent>(0, 255, 0, 0);
+	inc_area.add_component<BoxComponent>();
+	inc_area.add_component<ColliderComponent>("inc_area");
+
+	Entity& dec_area = manager.add_entity();
+	dec_area.add_component<TransformComponent>(700, 700, 100, 100);
+	dec_area.add_component<ColorComponent>(255, 0, 0, 0);
+	dec_area.add_component<BoxComponent>();
+	dec_area.add_component<ColliderComponent>("dec_area");
+
+	Entity& rotate_area = manager.add_entity();
+	rotate_area.add_component<TransformComponent>(350,350,100,100);
+	rotate_area.add_component<ColorComponent>(255, 255, 0, 0);
+	rotate_area.add_component<BoxComponent>();
+	rotate_area.add_component<ColliderComponent>("rotate_area");
+
+	Entity& run_area = manager.add_entity();
+	run_area.add_component<TransformComponent>(-100, -100, 50, 50);
+	run_area.add_component<ColorComponent>(0, 255, 255, 0);
+	run_area.add_component<BoxComponent>();
+	run_area.add_component<ColliderComponent>("run_area");
+
+	Entity& damage_area = manager.add_entity();
+	damage_area.add_component<TransformComponent>(-100, 0, 100, 100);
+	damage_area.add_component<ColorComponent>(255, 0, 255, 0);
+	damage_area.add_component<BoxComponent>();
+	damage_area.add_component<ColliderComponent>("damage_area");
+
+	manager.add_system<CollisionSystem>();
+	manager.add_system<PhysicSystem>();
+	manager.add_system<CameraSystem>(&object, 800, 800);
+	manager.add_system<LifeSystem>([](Entity* entity)
+			{
+				if (entity->has_component<HealthComponent>())
+				{
+					if (entity->get_component<HealthComponent>().health() <= 0)
+					{
+						if (entity->has_component<SpriteComponent>())
+						{
+							entity->remove_component<SpriteComponent>();
+						}
+					}
+				}
+			});
+	manager.add_system<RenderSystem>();
+
 	object.add_component<TransformComponent>(600, 600, 100, 100);
 	object.add_component<ColliderComponent>("Player");
 	object.add_component<ColorComponent>(0, 0, 255, 0);
 	object.add_component<PhysicComponent>(500, 500);
-	object.add_component<SpriteComponent>(renderer);
+	object.add_component<SpriteComponent>();
 	object.add_component<HealthComponent>(10);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
@@ -87,59 +140,6 @@ int main()
 			});
 
 
-	Entity& wall = manager.add_entity();
-	wall.add_component<TransformComponent>(100, 100, 80, 80);
-	wall.add_component<BoxComponent>();
-	wall.add_component<ColliderComponent>("Wall");
-
-	Entity& inc_area = manager.add_entity();
-	inc_area.add_component<TransformComponent>(0, 700, 100, 100);
-	inc_area.add_component<ColorComponent>(0, 255, 0, 0);
-	inc_area.add_component<BoxComponent>();
-	inc_area.add_component<ColliderComponent>("inc_area");
-
-	Entity& dec_area = manager.add_entity();
-	dec_area.add_component<TransformComponent>(700, 700, 100, 100);
-	dec_area.add_component<ColorComponent>(255, 0, 0, 0);
-	dec_area.add_component<BoxComponent>();
-	dec_area.add_component<ColliderComponent>("dec_area");
-
-	Entity& rotate_area = manager.add_entity();
-	rotate_area.add_component<TransformComponent>(350,350,100,100);
-	rotate_area.add_component<ColorComponent>(255, 255, 0, 0);
-	rotate_area.add_component<BoxComponent>();
-	rotate_area.add_component<ColliderComponent>("rotate_area");
-
-	Entity& run_area = manager.add_entity();
-	run_area.add_component<TransformComponent>(-100, -100, 50, 50);
-	run_area.add_component<ColorComponent>(0, 255, 255, 0);
-	run_area.add_component<BoxComponent>();
-	run_area.add_component<ColliderComponent>("run_area");
-
-	Entity& damage_area = manager.add_entity();
-	damage_area.add_component<TransformComponent>(-100, 0, 100, 100);
-	damage_area.add_component<ColorComponent>(255, 0, 255, 0);
-	damage_area.add_component<BoxComponent>();
-	damage_area.add_component<ColliderComponent>("damage_area");
-
-	manager.add_system<CollisionSystem>();
-	manager.add_system<PhysicSystem>();
-	manager.add_system<CameraSystem>(&object, 800, 800);
-	manager.add_system<LifeSystem>([](Entity* entity)
-			{
-				if (entity->has_component<HealthComponent>())
-				{
-					if (entity->get_component<HealthComponent>().health() <= 0)
-					{
-						if (entity->has_component<SpriteComponent>())
-						{
-							entity->remove_component<SpriteComponent>();
-						}
-					}
-				}
-			});
-	manager.add_system<RenderSystem>(renderer);
-
 	while (isWork)
 	{
 // Calculate delta time
@@ -198,8 +198,6 @@ int main()
 	}
 
 // Free memory
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return 0;
 }

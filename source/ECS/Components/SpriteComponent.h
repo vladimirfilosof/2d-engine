@@ -20,7 +20,6 @@ struct Animation
 class SpriteComponent : public Component
 {
 private:
-	SDL_Renderer* renderer;
 	int size;
 	SDL_Rect rect;
 	bool isLocked;
@@ -33,7 +32,7 @@ public:
 	Animation* animation;
 	int current_animation;
 	
-	SpriteComponent(SDL_Renderer* renderer);
+	SpriteComponent();
 	~SpriteComponent();
 
 	void init();

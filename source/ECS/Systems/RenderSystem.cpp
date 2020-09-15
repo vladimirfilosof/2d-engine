@@ -1,12 +1,17 @@
 #include "RenderSystem.h"
 #include "iostream"
 
-RenderSystem::RenderSystem(SDL_Renderer* renderer)
+SDL_Renderer* RenderSystem::renderer = nullptr;
+
+RenderSystem::RenderSystem()
 {
-	this->renderer = renderer;
+	window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 RenderSystem::~RenderSystem()
 {
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 }
 
 void RenderSystem::update()
