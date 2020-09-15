@@ -16,7 +16,7 @@ void PhysicSystem::update()
 
 	for (auto& item : entities)
 	{
-		if (item->has_component<TransformComponent>() && item->has_component<PhysicComponent>())
+		if (item->has_component<PhysicComponent>() && item->has_component<TransformComponent>())
 		{
 			PhysicComponent& pc = item->get_component<PhysicComponent>();
 			pc.direction().normalize();

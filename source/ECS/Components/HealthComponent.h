@@ -22,7 +22,7 @@ public:
 
 	double& health(){return current_health;}
 
-	void change_maxHealth(const double& new_maxHealth){current_health = (current_health * new_maxHealth) / max_health; max_health = new_maxHealth;}
+	void change_maxHealth(const double& new_maxHealth);
 
 	void add_damage(const double& damage);
 	

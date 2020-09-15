@@ -24,3 +24,9 @@ void HealthComponent::add_damage (const double& damage)
 		damage_time = std::chrono::system_clock::now();
 	}
 }
+void HealthComponent::change_maxHealth(const double& new_maxHealth)
+{
+	if (max_health == 0) throw std::runtime_error("[HealthComponent] <change_maxHealth>: division by zero! max_health is equal to zero");
+	current_health = (current_health * new_maxHealth) / max_health; 
+	max_health = new_maxHealth;
+}
