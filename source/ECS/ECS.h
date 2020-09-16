@@ -47,6 +47,7 @@ class Component
 private:
 public:
 	Entity* entity;
+	bool isActive;
 
 	virtual ~Component(){}
 	virtual void init(){}
@@ -59,6 +60,7 @@ protected:
 	std::vector<Entity*> entities;
 public:
 	EntityManager* manager;
+	bool isActive;
 
 	virtual ~System(){}
 	virtual void update(){}
@@ -86,6 +88,8 @@ private:
 	}
 
 public:
+	bool isActive;
+
 	Entity();
 	~Entity();
 
@@ -118,6 +122,7 @@ public:
 		components_bitset[get_typeID<T>()] = true;
 		buf->entity = this;
 		buf->init();
+		buf->isActive = true;
 		return *buf;
 	}
 	template<typename T>
@@ -195,6 +200,7 @@ public:
 		systems_bitset[get_typeID<T>()] = true;
 		buf->manager = this;
 		buf->init();
+		buf->isActive = true;
 		return *buf;
 	}
 

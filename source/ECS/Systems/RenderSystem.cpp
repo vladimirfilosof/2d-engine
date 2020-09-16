@@ -20,6 +20,7 @@ void RenderSystem::update()
 {
 #ifdef DEBUG
 	std::cout << "[DEBUG]: RenderSystem begin" << std::endl;
+	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
@@ -53,7 +54,9 @@ void RenderSystem::update()
 		}
 	}
 	SDL_RenderPresent(renderer);
-#ifdef DEBUG
+	#ifdef DEBUG
+	std::chrono::system_clock::time_point e = std::chrono::system_clock::now();
+	std::cout << "Render system duration: " << ((std::chrono::duration<double>)(e - b)).count() << std::endl;
 	std::cout << "[DEBUG]: RenderSystem end" << std::endl;
 #endif
 

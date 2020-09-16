@@ -40,6 +40,7 @@ void EntityManager::update()
 Entity& EntityManager::add_entity()
 {
 	Entity* buf = new Entity();
+	buf->isActive = true;
 	entities.push_back(buf);
 	return *buf;
 }
