@@ -66,7 +66,7 @@ int main()
 					{
 						if (entity->has_component<SpriteComponent>())
 						{
-							entity->remove_component<SpriteComponent>();
+							entity->isActive = false;
 						}
 					}
 				}

@@ -27,6 +27,7 @@ void RenderSystem::update()
 	SDL_Rect rect;
 	for (auto& item : entities)
 	{
+		if (!item->isActive) continue;
 		if (item->has_component<TransformComponent>())
 		{
 			rect = item->get_component<TransformComponent>().get_rect();

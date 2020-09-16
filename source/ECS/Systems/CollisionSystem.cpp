@@ -15,12 +15,12 @@ void CollisionSystem::update()
 #endif
 	for (unsigned register int i = 0 ; i < entities.size() - 1 ; i++)
 	{
-		if (entities[i]->has_component<ColliderComponent>())
+		if (entities[i]->isActive && entities[i]->has_component<ColliderComponent>())
 		{
 			TransformComponent& tc1 = entities[i]->get_component<TransformComponent>();
 			for (unsigned register int j = i + 1 ; j < entities.size() ; j++)
 			{
-				if (entities[j]->has_component<ColliderComponent>())
+				if (entities[j]->isActive && entities[j]->has_component<ColliderComponent>())
 				{
 					TransformComponent& tc2 = entities[j]->get_component<TransformComponent>();
 					

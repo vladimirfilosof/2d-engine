@@ -16,6 +16,7 @@ void PhysicSystem::update()
 
 	for (auto& item : entities)
 	{
+		if (!item->isActive) continue;
 		if (item->has_component<PhysicComponent>() && item->has_component<TransformComponent>())
 		{
 			PhysicComponent& pc = item->get_component<PhysicComponent>();
