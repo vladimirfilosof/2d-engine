@@ -1,6 +1,6 @@
 #include "TransformComponent.h"
 
-// difinition Size class
+// definition Size class
 Size::Size()
 {
 	height = 0;
@@ -25,7 +25,7 @@ double& Size::w()
 	return width;
 }
 
-// difinition TransformComponent
+// definition TransformComponent
 
 TransformComponent::TransformComponent()
 {

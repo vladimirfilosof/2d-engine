@@ -6,5 +6,6 @@
 #include "CollisionSystem.h"
 #include "CameraSystem.h"
 #include "LifeSystem.h"
+#include "SoundSystem.h"
 
 #endif

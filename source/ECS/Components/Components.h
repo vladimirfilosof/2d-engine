@@ -8,5 +8,6 @@
 #include "SpriteComponent.h"
 #include "BoxComponent.h"
 #include "HealthComponent.h"
+#include "SoundComponent.h"
 
 #endif
