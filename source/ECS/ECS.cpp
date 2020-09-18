@@ -11,6 +11,10 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	for (auto& component : components)
+	{
+		delete component;
+	}
 }
 
 void System::init()
