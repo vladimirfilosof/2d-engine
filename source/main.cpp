@@ -74,7 +74,7 @@ int main()
 					}
 				}
 			});
-	manager.add_system<RenderSystem>();
+	manager.add_system<RenderSystem>("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN, SDL_RENDERER_ACCELERATED || SDL_RENDERER_PRESENTVSYNC);
 	manager.add_system<SoundSystem>(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
 	object.add_component<SoundComponent>();

@@ -5,11 +5,11 @@
 
 SDL_Renderer* RenderSystem::renderer = NULL;
 
-RenderSystem::RenderSystem()
+RenderSystem::RenderSystem(const char* window_title, const int& position_x, const int& position_y, const int& width, const int& height, const Uint32& window_flags, const Uint32& renderer_flags)
 {
-	window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(window_title, position_x, position_y, width, height, window_flags);
 	if (window == NULL) throw std::runtime_error("[RenderSystem] <RenderSystem>: window creating error");
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, renderer_flags);
 	if (renderer == NULL) throw std::runtime_error("[RenderSystem] <RenderSystem>: renderer creating error");
 }
 RenderSystem::~RenderSystem()
