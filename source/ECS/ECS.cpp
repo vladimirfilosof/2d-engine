@@ -27,6 +27,11 @@ EntityManager::~EntityManager()
 	{
 		delete item;
 	}
+
+	for (auto& system : systems)
+	{
+		delete system;
+	}
 }
 
 void EntityManager::update()

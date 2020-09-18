@@ -1,7 +1,9 @@
 #include "RenderSystem.h"
-#include "iostream"
+#ifdef DEBUG
+	#include <iostream>
+#endif
 
-SDL_Renderer* RenderSystem::renderer = nullptr;
+SDL_Renderer* RenderSystem::renderer = NULL;
 
 RenderSystem::RenderSystem()
 {
@@ -12,6 +14,9 @@ RenderSystem::RenderSystem()
 }
 RenderSystem::~RenderSystem()
 {
+#ifdef DEBUG
+	std::cout << "[Debug]: RenderSystem destructor calling" << std::endl;
+#endif
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
