@@ -4,5 +4,8 @@
 	3) ItemComponent
 	4) LightSystem
 	5) Event component and system
+	6) Sound component and system
+		- erase samples
+		- playback samples
 2. Add isAcitve to Component properties
 3. Add panels, buttons and e.t.c.
