@@ -147,7 +147,25 @@ void CollisionSystem::update()
 void CollisionSystem::next_step(Entity* entity, SDL_Rect& Dtc_x, SDL_Rect& Dtc_y)
 {
 	PhysicComponent& pc = entity->get_component<PhysicComponent>();
-	Dtc_x.x += pc.direction().x() * pc.speed().x() * DeltaTime::delta;
-	Dtc_y.y += pc.direction().y() * pc.speed().y() * DeltaTime::delta;
+	SDL_Rect buf_x = Dtc_x;
+	SDL_Rect buf_y = Dtc_y;
+
+	if (pc.direction().x() != 0)
+	{
+		Dtc_x.x += pc.direction().x() * pc.speed().x() * DeltaTime::delta;
+		if (buf_x.x == Dtc_x.x)
+		{
+			Dtc_x.x += pc.direction().x();
+		}
+	}
+	if (pc.direction().y() != 0)
+	{
+		Dtc_y.y += pc.direction().y() * pc.speed().y() * DeltaTime::delta;
+		if (buf_y.y == Dtc_y.y)
+		{
+			Dtc_y.y += pc.direction().y();
+		}
+	}
+
 }
 
