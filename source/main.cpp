@@ -21,8 +21,6 @@ int main()
 
 	EntityManager manager;
 
-
-
 	Entity& object = manager.add_entity();
 
 	Entity& wall = manager.add_entity();
