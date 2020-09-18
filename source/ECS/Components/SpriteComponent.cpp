@@ -1,6 +1,10 @@
 #include "SpriteComponent.h"
 #include "../Systems/RenderSystem.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
 SpriteComponent::SpriteComponent()
 {
 }
@@ -12,6 +16,9 @@ SpriteComponent::~SpriteComponent()
 		SDL_DestroyTexture(animation[i].texture);
 	}
 	delete[] animation;
+#ifdef DEBUG
+	std::cout << "[DEBUG]: SpriteComponent destructor calling" << std::endl;
+#endif
 }
 
 void SpriteComponent::init()

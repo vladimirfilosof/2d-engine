@@ -1,8 +1,18 @@
 #include "SoundComponent.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
+
 SoundComponent::SoundComponent(){}
 
-SoundComponent::~SoundComponent(){}
+SoundComponent::~SoundComponent()
+{
+#ifdef DEBUG
+	std::cout << "[DEBUG]: SoundComponent destructor calling" << std::endl;
+#endif
+}
 
 void SoundComponent::add_sample(const char* key, const char* file_path, int volume)
 {

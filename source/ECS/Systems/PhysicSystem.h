@@ -5,7 +5,6 @@
 #include "../Components/PhysicComponent.h"
 #include "../Components/TransformComponent.h"
 #include <vector>
-#include <iostream>
 #include "../../DeltaTime.h"
 
 class PhysicSystem : public System

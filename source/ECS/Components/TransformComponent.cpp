@@ -1,5 +1,9 @@
 #include "TransformComponent.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
 // definition Size class
 Size::Size()
 {
@@ -13,7 +17,8 @@ Size::Size(const double& height, const double& width)
 }
 
 Size::~Size()
-{}
+{
+}
 
 double& Size::h()
 {
@@ -41,7 +46,11 @@ TransformComponent::TransformComponent(const double& x, const double& y, const d
 }
 
 TransformComponent::~TransformComponent()
-{}
+{
+#ifdef DEBUG
+	std::cout << "[DEBUG]: TransformComponent destructor calling" << std::endl;
+#endif
+}
 
 Vector2D& TransformComponent::coords()
 {

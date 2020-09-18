@@ -6,10 +6,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	for (auto& item : components)
-	{
-		delete item;
-	}
 }
 
 void System::init()

@@ -3,7 +3,6 @@
 
 #include "../ECS.h"
 #include <chrono>
-#include <iostream>
 
 class HealthComponent : public Component
 {

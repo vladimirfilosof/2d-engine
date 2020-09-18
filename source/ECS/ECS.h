@@ -31,6 +31,7 @@
 #include <array>
 #include <bitset>
 #include <algorithm>
+#include <memory>
 
 // Max components quantity that you can create
 #define MAX_COMPONENTS 32
@@ -70,7 +71,7 @@ public:
 class Entity
 {
 private:
-	std::vector<Component*> components;
+	std::vector<Component*> components; // Contains pointers - needs to 
 	std::array<Component*, MAX_COMPONENTS> components_array;
 	std::bitset<MAX_COMPONENTS> components_bitset;
 
@@ -117,7 +118,7 @@ public:
 		}
 
 		T* buf = new T(MArgs...);
-		components.push_back(buf);
+		components.emplace_back(buf);
 		components_array[get_typeID<T>()] = buf;
 		components_bitset[get_typeID<T>()] = true;
 		buf->entity = this;
@@ -125,6 +126,8 @@ public:
 		buf->isActive = true;
 		return *buf;
 	}
+
+// Do not use this function in runtime where need high performance
 	template<typename T>
 	void remove_component()
 	{
@@ -195,7 +198,7 @@ public:
 			exit(1);
 		}
 		T* buf = new T(MArgs...);
-		systems.push_back(buf);
+		systems.emplace_back(buf);
 		systems_array[get_typeID<T>()] = buf;
 		systems_bitset[get_typeID<T>()] = true;
 		buf->manager = this;

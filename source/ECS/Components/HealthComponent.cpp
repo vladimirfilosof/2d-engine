@@ -1,5 +1,9 @@
 #include "HealthComponent.h"
 
+#ifdef debug
+	#include <iostream>
+#endif
+
 HealthComponent::HealthComponent(const double& max_health)
 {
 	this->max_health = max_health;
@@ -8,6 +12,9 @@ HealthComponent::HealthComponent(const double& max_health)
 
 HealthComponent::~HealthComponent()
 {
+#ifdef debug
+	std::cout << "[DEBUG]: HealthComponent destructor calling" << std::endl;
+#endif
 }
 
 void HealthComponent::init()

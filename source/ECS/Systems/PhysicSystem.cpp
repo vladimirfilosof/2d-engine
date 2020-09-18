@@ -1,11 +1,18 @@
 #include "PhysicSystem.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
 PhysicSystem::PhysicSystem()
 {
 }
 
 PhysicSystem::~PhysicSystem()
 {
+#ifdef DEBUG
+	std::cout << "[DEBUG]: PhysicSystem destructor calling" << std::endl;
+#endif
 }
 
 void PhysicSystem::update()

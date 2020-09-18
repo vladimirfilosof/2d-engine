@@ -2,7 +2,6 @@
 #define VECTOR2D_H
 
 #include <cmath>
-#include <iostream>
 #include <stdexcept>
 
 class Vector2D

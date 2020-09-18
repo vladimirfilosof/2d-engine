@@ -1,6 +1,7 @@
 #include "ColliderComponent.h"
-#include <iostream>
-
+#ifdef DEBUG
+	#include <iostream>
+#endif
 
 ColliderComponent::ColliderComponent(std::string tag)
 {
@@ -9,6 +10,9 @@ ColliderComponent::ColliderComponent(std::string tag)
 
 ColliderComponent::~ColliderComponent()
 {
+#ifdef debug
+	std::cout << "[DEBUG]: ColliderComponent destructor calling" << std::endl;
+#endif
 }
 
 void ColliderComponent::init()

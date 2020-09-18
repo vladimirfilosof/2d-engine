@@ -1,5 +1,9 @@
 #include "LifeSystem.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
 LifeSystem::LifeSystem(void(*FUNC)(Entity* entity))
 {
 	LifePTR = FUNC;
@@ -7,6 +11,9 @@ LifeSystem::LifeSystem(void(*FUNC)(Entity* entity))
 
 LifeSystem::~LifeSystem()
 {
+#ifdef DEBUG
+	std::cout << "[DEBUG]: LifeSystem destructor calling" << std::endl;
+#endif
 }
 
 void LifeSystem::update()

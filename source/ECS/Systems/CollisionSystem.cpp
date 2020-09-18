@@ -1,11 +1,18 @@
 #include "CollisionSystem.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
 CollisionSystem::CollisionSystem()
 {
 }
 
 CollisionSystem::~CollisionSystem()
 {
+#ifdef DEBUG
+	std::cout << "[DEBUG]: CollisionSystem destuctor calling" << std::endl;
+#endif
 }
 
 void CollisionSystem::update()

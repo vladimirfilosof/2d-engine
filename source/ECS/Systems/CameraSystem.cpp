@@ -1,5 +1,9 @@
 #include "CameraSystem.h"
 
+#ifdef DEBUG
+	#include <iostream>
+#endif
+
 CameraSystem::CameraSystem(Entity* focus, const int& width, const int& height)
 {
 	this->focus = focus;
@@ -8,7 +12,11 @@ CameraSystem::CameraSystem(Entity* focus, const int& width, const int& height)
 }
 
 CameraSystem::~CameraSystem()
-{}
+{
+#ifdef DEBUG
+	std::cout << "[DEBUG]: CameraSystem destructor calling" << std::endl;
+#endif
+}
 
 void CameraSystem::update()
 {
