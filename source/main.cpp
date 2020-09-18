@@ -4,7 +4,10 @@
 int main()
 {
 // Initialize SDL, creating window and renderer
-	SDL_Init(SDL_INIT_EVERYTHING);
+	if (SDL_Init(SDL_INIT_EVERYTHING))
+	{
+		exit (1);
+	}
 
 // This variable responsible for exiting the program
 	bool isWork = true;
@@ -18,7 +21,6 @@ int main()
 
 	EntityManager manager;
 	Entity& object = manager.add_entity();
-	
 
 	Entity& wall = manager.add_entity();
 	wall.add_component<TransformComponent>(100, 100, 80, 80);
