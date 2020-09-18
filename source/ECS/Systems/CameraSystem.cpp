@@ -2,6 +2,7 @@
 
 #ifdef DEBUG
 	#include <iostream>
+	#include <chrono>
 #endif
 
 CameraSystem::CameraSystem(Entity* focus, const int& width, const int& height)
@@ -21,7 +22,8 @@ CameraSystem::~CameraSystem()
 void CameraSystem::update()
 {
 #ifdef DEBUG
-	std::cout << "[DEBUG]: CameraSystem begin" << std::endl;
+	std::cout << "\t[DEBUG]: CameraSystem begins" << std::endl;
+	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
 	int xpos = focus->get_component<TransformComponent>().coords().x() - (width - focus->get_component<TransformComponent>().size().w()) / 2; 
 	int ypos = focus->get_component<TransformComponent>().coords().y() - (height - focus->get_component<TransformComponent>().size().h()) / 2; 
@@ -32,7 +34,9 @@ void CameraSystem::update()
 		item->get_component<TransformComponent>().coords().y() -= ypos;
 	}
 #ifdef DEBUG
-	std::cout << "[DEBUG]: CameraSystem end" << std::endl;
+	std::chrono::system_clock::time_point e = std::chrono::system_clock::now();
+	std::chrono::duration<double> d = e - b;
+	std::cout << "\t[DEBUG]: CameraSystem ends with duration: " << std::to_string(d.count()) << std::endl;
 #endif
 }
 

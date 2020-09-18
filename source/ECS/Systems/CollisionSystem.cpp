@@ -2,6 +2,7 @@
 
 #ifdef DEBUG
 	#include <iostream>
+	#include <chrono>
 #endif
 
 CollisionSystem::CollisionSystem()
@@ -18,7 +19,8 @@ CollisionSystem::~CollisionSystem()
 void CollisionSystem::update()
 {
 #ifdef DEBUG
-	std::cout << "[DEBUG]: CollisionSystem begin" << std::endl;
+	std::cout << "\t[DEBUG]: CollisionSystem begins" << std::endl;
+	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
 	for (unsigned register int i = 0 ; i < entities.size() - 1 ; i++)
 	{
@@ -136,7 +138,9 @@ void CollisionSystem::update()
 		}
 	}
 #ifdef DEBUG
-	std::cout << "[DEBUG]: CollisionSystem end" << std::endl;
+	std::chrono::system_clock::time_point e = std::chrono::system_clock::now();
+	std::chrono::duration<double> d = e - b;
+	std::cout << "\t[DEBUG]: CollisionSystem ends with duration: " << std::to_string(d.count()) << std::endl;
 #endif
 }
 
