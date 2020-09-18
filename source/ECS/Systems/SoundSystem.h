@@ -3,12 +3,15 @@
 
 #include "../ECS.h"
 #include "../Components/SoundComponent.h"
+#include <iostream>
 
-class SoundSystem
+class SoundSystem : public System
 {
 public:
 	SoundSystem(int frequency, Uint16 format, int channels, int chunksize);
 	~SoundSystem();
+
+	void update();
 
 private:
 };

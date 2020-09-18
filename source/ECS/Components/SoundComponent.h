@@ -4,7 +4,6 @@
 #include "../ECS.h"
 #include <SDL2/SDL_mixer.h>
 #include <map>
-#include <string>
 
 //value of volume must be ranged from 0 to 128
 
@@ -14,11 +13,14 @@ public:
 	SoundComponent();
 	~SoundComponent();
 
-	void add_sample(const std::string key, const std::string file_path, int volume);
-	void add_music(const std::string key, const std::string file_path, int volume);
+	void add_sample(const char* key, const char* file_path, int volume);
+	void add_music(const char* key, const char* file_path, int volume);
 
-	void change_sample_vol(const std::string key, int volume);
-	void change_music_vol(const std::string key, int volume);
+	void change_sample_vol(const char* key, int volume);
+	void change_music_vol(const char* key, int volume);
+
+	void play_sample(const char* key);
+	void play_music(const char* key);
 
 private:
 	class sample
@@ -47,8 +49,8 @@ private:
 		int volume;
 	};
 
-	std::map<std::string, sample> Sample;
-	std::map<std::string, music> Music;
+	std::map<const char*, sample> Sample;
+	std::map<const char*, music> Music;
 };
 
 #endif

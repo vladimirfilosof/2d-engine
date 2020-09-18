@@ -17,6 +17,9 @@ int main()
 	DeltaTime dt;
 
 	EntityManager manager;
+
+
+
 	Entity& object = manager.add_entity();
 	
 
@@ -72,7 +75,9 @@ int main()
 				}
 			});
 	manager.add_system<RenderSystem>();
+	manager.add_system<SoundSystem>(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
+	object.add_component<SoundComponent>();
 	object.add_component<TransformComponent>(600, 600, 100, 100);
 	object.add_component<ColliderComponent>("Player");
 	object.add_component<ColorComponent>(0, 0, 255, 0);
@@ -81,6 +86,9 @@ int main()
 	object.add_component<HealthComponent>(10);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
+
+	object.get_component<SoundComponent>().add_sample("wall_hit", "../sound/kick.wav", 128);
+
 	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
 			{
 				if (e1->has_component<TransformComponent>())
@@ -113,7 +121,14 @@ int main()
 				{
 					if (e1->get_component<ColliderComponent>().x_axis) e1->get_component<PhysicComponent>().direction().x() = 0;
 					if (e1->get_component<ColliderComponent>().y_axis) e1->get_component<PhysicComponent>().direction().y() = 0;
+					
+					if (e1->has_component<SoundComponent>())
+					{
+						e1->get_component<SoundComponent>().play_sample("wall_hit");
+					}
 				}
+
+			
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
 			{
