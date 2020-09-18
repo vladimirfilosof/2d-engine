@@ -12,7 +12,7 @@
 class CollisionSystem : public System
 {
 private:
-	void next_step(Entity* entity, PhysicComponent*& pc, TransformComponent& Dtc_x, TransformComponent& Dtc_y);
+	void next_step(Entity* entity, SDL_Rect& Dtc_x, SDL_Rect& Dtc_y);
 public:
 	CollisionSystem(); 
 	~CollisionSystem();
