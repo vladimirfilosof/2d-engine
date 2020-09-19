@@ -10,7 +10,6 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <chrono>
-#include <cmath>
 
 #include "../../fps.h"
 

@@ -4,7 +4,7 @@
 	#include <iostream>
 #endif
 
-SDL_Renderer* RenderSystem::renderer = NULL;
+SDL_Renderer* RenderSystem::renderer = nullptr;
 
 RenderSystem::RenderSystem(const char* window_title, const int& position_x, const int& position_y, const int& width, const int& height, const Uint32& window_flags, const Uint32& renderer_flags)
 {

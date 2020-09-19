@@ -21,7 +21,7 @@ LDFLAGS := -g
 # Libs (ex: -lm, -lncurses, -lSDL2)
 LIBS := -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 # Defines (ex: -D DEBUG, -Dcount=5)
-DEF := -D DEBUG 
+DEF := -D DEBUG
 # Directories with source code (ex: source)
 DIR := source source/ECS source/ECS/Components source/ECS/Systems
 

@@ -9,7 +9,6 @@ int main()
 		exit (1);
 	}
 
-
 // This variable responsible for exiting the program
 	bool isWork = true;
 
@@ -151,7 +150,6 @@ int main()
 				if (e1->has_component<HealthComponent>())
 				{
 					e1->get_component<HealthComponent>().add_damage(10);
-					std::cout << e1->get_component<HealthComponent>().health() << std::endl;
 				}
 			});
 
