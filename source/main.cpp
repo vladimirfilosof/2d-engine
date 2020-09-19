@@ -74,7 +74,7 @@ int main()
 					}
 				}
 			});
-	manager.add_system<RenderSystem>("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 700, SDL_WINDOW_SHOWN, SDL_RENDERER_ACCELERATED || SDL_RENDERER_PRESENTVSYNC);
+	manager.add_system<RenderSystem>("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	manager.add_system<SoundSystem>(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
 	object.add_component<SoundComponent>();
@@ -130,11 +130,11 @@ int main()
 
 			
 			});
-	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area",[](Entity* e1, Entity* e2)
+	object.get_component<ColliderComponent>().add_collisionEvent("rotate_area", [](Entity* e1, Entity* e2)
 			{
 				if (e1->has_component<SpriteComponent>())
 				{
-					e1->get_component<SpriteComponent>().angle() += 360;
+					e1->get_component<SpriteComponent>().angle() += 360 * DeltaTime::delta;
 				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)

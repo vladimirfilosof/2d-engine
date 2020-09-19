@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <chrono>
+#include <cmath>
 
 class RenderSystem : public System
 {

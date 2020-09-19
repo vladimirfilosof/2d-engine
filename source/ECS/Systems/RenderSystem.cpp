@@ -27,8 +27,10 @@ void RenderSystem::update()
 	std::cout << "\t[DEBUG]: RenderSystem begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
+
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
+
 	SDL_Rect rect;
 	for (auto& item : entities)
 	{
@@ -44,7 +46,7 @@ void RenderSystem::update()
 				SDL_Point center;
 				center.x = rect.w / 2;
 				center.y = rect.h / 2;
-				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, sprite.angle() * 0.0176, &center, sprite.flip());
+				SDL_RenderCopyEx(renderer, sprite.get_texture(), &sprite.get_rect(), &rect, sprite.angle(), &center, sprite.flip());
 			}
 
 			if (item->has_component<BoxComponent>())
