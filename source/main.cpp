@@ -4,10 +4,11 @@
 int main()
 {
 // Initialize SDL, creating window and renderer
-	if (SDL_Init(SDL_INIT_EVERYTHING))
+	if (SDL_Init(SDL_INIT_EVERYTHING) || TTF_Init())
 	{
 		exit (1);
 	}
+
 
 // This variable responsible for exiting the program
 	bool isWork = true;
@@ -153,7 +154,6 @@ int main()
 					std::cout << e1->get_component<HealthComponent>().health() << std::endl;
 				}
 			});
-
 
 	while (isWork)
 	{
