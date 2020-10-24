@@ -11,6 +11,7 @@ private:
 	int width;
 	int height;
 public:
+	CameraSystem(const int& width, const int& height);
 	CameraSystem(Entity* focus, const int& width, const int& height);
 	~CameraSystem();
 

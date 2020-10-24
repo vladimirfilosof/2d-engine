@@ -58,7 +58,6 @@ class System
 {
 private:
 protected:
-	std::vector<Entity*> entities;
 public:
 	EntityManager* manager;
 	bool isActive;

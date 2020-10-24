@@ -20,8 +20,25 @@ int main()
 	DeltaTime dt;
 
 	EntityManager manager;
-
-	Entity& object = manager.add_entity();
+	
+	manager.add_system<CollisionSystem>();
+	manager.add_system<PhysicSystem>();
+	manager.add_system<CameraSystem>(800, 800);
+	manager.add_system<LifeSystem>([](Entity* entity)
+			{
+				if (entity->has_component<HealthComponent>())
+				{
+					if (entity->get_component<HealthComponent>().health() <= 0)
+					{
+						if (entity->has_component<SpriteComponent>())
+						{
+							entity->isActive = false;
+						}
+					}
+				}
+			});
+	manager.add_system<RenderSystem>("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	manager.add_system<SoundSystem>(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 
 	Entity& wall = manager.add_entity();
 	wall.add_component<TransformComponent>(100, 100, 80, 80);
@@ -58,26 +75,7 @@ int main()
 	damage_area.add_component<BoxComponent>();
 	damage_area.add_component<ColliderComponent>("damage_area");
 
-	manager.add_system<CollisionSystem>();
-	manager.add_system<PhysicSystem>();
-	manager.add_system<CameraSystem>(&object, 800, 800);
-	manager.add_system<LifeSystem>([](Entity* entity)
-			{
-				if (entity->has_component<HealthComponent>())
-				{
-					if (entity->get_component<HealthComponent>().health() <= 0)
-					{
-						if (entity->has_component<SpriteComponent>())
-						{
-							entity->isActive = false;
-						}
-					}
-				}
-			});
-	manager.add_system<RenderSystem>("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	manager.add_system<SoundSystem>(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-
-	object.add_component<SoundComponent>();
+	Entity& object = manager.add_entity();
 	object.add_component<TransformComponent>(600, 600, 100, 100);
 	object.add_component<ColliderComponent>("Player");
 	object.add_component<ColorComponent>(0, 0, 255, 0);
@@ -87,6 +85,7 @@ int main()
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_peace.png", 0, 1);
 	object.get_component<SpriteComponent>().add_animation("../texture/dino_run.png", 0.2, 2);
 
+	object.add_component<SoundComponent>();
 	object.get_component<SoundComponent>().add_sample("wall_hit", "../sound/kick.wav", 128);
 
 	object.get_component<ColliderComponent>().add_collisionEvent("inc_area",[](Entity* e1, Entity* e2)
@@ -153,6 +152,7 @@ int main()
 				}
 			});
 
+	manager.get_system<CameraSystem>().change_focus(&object);
 	while (isWork)
 	{
 // Calculate delta time

@@ -22,7 +22,7 @@ void PhysicSystem::update()
 	std::cout << "\t[DEBUG]: PhysicSystem begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
-
+	std::vector<Entity*>& entities = manager->get_entities();
 	for (auto& item : entities)
 	{
 		if (!item->isActive) continue;

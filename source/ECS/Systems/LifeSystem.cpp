@@ -23,7 +23,7 @@ void LifeSystem::update()
 	std::cout << "\t[DEBUG]: LifeSystem begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
-
+	std::vector<Entity*>& entities = manager->get_entities();
 	std::for_each(entities.begin(), entities.end(), LifePTR);
 
 #ifdef DEBUG

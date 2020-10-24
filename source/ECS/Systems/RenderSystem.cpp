@@ -32,7 +32,7 @@ void RenderSystem::update()
 	std::cout << "\t[DEBUG]: RenderSystem begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
-
+	std::vector<Entity*>& entities = manager->get_entities();
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 

@@ -5,6 +5,11 @@
 	#include <chrono>
 #endif
 
+CameraSystem::CameraSystem(const int& width, const int& height)
+{
+	this->width = width;
+	this->height = height;
+}
 CameraSystem::CameraSystem(Entity* focus, const int& width, const int& height)
 {
 	this->focus = focus;
@@ -25,6 +30,7 @@ void CameraSystem::update()
 	std::cout << "\t[DEBUG]: CameraSystem begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
+	std::vector<Entity*>& entities = manager->get_entities();
 	int xpos = focus->get_component<TransformComponent>().coords().x() - (width - focus->get_component<TransformComponent>().size().w()) / 2; 
 	int ypos = focus->get_component<TransformComponent>().coords().y() - (height - focus->get_component<TransformComponent>().size().h()) / 2; 
 

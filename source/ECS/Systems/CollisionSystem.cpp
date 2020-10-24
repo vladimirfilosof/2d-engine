@@ -22,7 +22,8 @@ void CollisionSystem::update()
 	std::cout << "\t[DEBUG]: CollisionSystem begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
 #endif
-	for (unsigned register int i = 0 ; i < entities.size() - 1 ; i++)
+	std::vector<Entity*>& entities = manager->get_entities();
+	for (register int i = 0 ; i < static_cast<int>(entities.size()) - 1 ; i++)
 	{
 		if (entities[i]->isActive && entities[i]->has_component<ColliderComponent>())
 		{
