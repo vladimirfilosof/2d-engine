@@ -18,10 +18,6 @@ PhysicSystem::~PhysicSystem()
 
 void PhysicSystem::update()
 {
-#ifdef DEBUG
-	std::cout << "\t[DEBUG]: PhysicSystem begins" << std::endl;
-	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
-#endif
 	std::vector<Entity*>& entities = manager->get_entities();
 	for (auto& item : entities)
 	{
@@ -33,10 +29,4 @@ void PhysicSystem::update()
 			item->get_component<TransformComponent>().coords() += pc.direction() * pc.speed() * DeltaTime::delta;
 		}
 	}
-#ifdef DEBUG
-	std::chrono::system_clock::time_point e = std::chrono::system_clock::now();
-	std::chrono::duration<double> d = e - b;
-	std::cout << "\t[DEBUG]: PhysicSystem ends with duration: " << std::to_string(d.count()) << std::endl;
-#endif
-
 }

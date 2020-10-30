@@ -3,6 +3,7 @@
 #ifdef DEBUG
 	#include <iostream>
 	#include <chrono>
+	#include "../dbhelper.h"
 #endif
 
 Entity::Entity()
@@ -43,11 +44,16 @@ void EntityManager::update()
 #ifdef DEBUG
 	std::cout << "[DEBUG]: Update loop begins" << std::endl;
 	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
-#endif
-	for (auto& item : systems)
+	for (auto& system : systems)
 	{
-		item->update();
+		DBHelper::check_exectime(&System::update,system);
 	}
+#else
+	for (auto& system : systems)
+	{
+		system->update();
+	}
+#endif
 #ifdef DEBUG
 	std::chrono::system_clock::time_point e = std::chrono::system_clock::now();
 	std::chrono::duration<double> d = e - b;

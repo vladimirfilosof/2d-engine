@@ -18,10 +18,6 @@ CollisionSystem::~CollisionSystem()
 
 void CollisionSystem::update()
 {
-#ifdef DEBUG
-	std::cout << "\t[DEBUG]: CollisionSystem begins" << std::endl;
-	std::chrono::system_clock::time_point b = std::chrono::system_clock::now();
-#endif
 	std::vector<Entity*>& entities = manager->get_entities();
 	for (register int i = 0 ; i < static_cast<int>(entities.size()) - 1 ; i++)
 	{
@@ -138,11 +134,6 @@ void CollisionSystem::update()
 			}
 		}
 	}
-#ifdef DEBUG
-	std::chrono::system_clock::time_point e = std::chrono::system_clock::now();
-	std::chrono::duration<double> d = e - b;
-	std::cout << "\t[DEBUG]: CollisionSystem ends with duration: " << std::to_string(d.count()) << std::endl;
-#endif
 }
 
 void CollisionSystem::next_step(Entity* entity, SDL_Rect& Dtc_x, SDL_Rect& Dtc_y)
