@@ -23,7 +23,7 @@ fps::~fps()
 
 void fps::print_fps()
 {
-	SDL_Surface *surf = TTF_RenderUTF8_Blended(font, std::to_string((int)(1/DeltaTime::delta)).c_str(), color);
+	SDL_Surface *surf = TTF_RenderUTF8_Blended(font, std::to_string((int)(1/DBHelper::delta)).c_str(), color);
 	if (surf == NULL)
 	{
 		std::cout << "surf";

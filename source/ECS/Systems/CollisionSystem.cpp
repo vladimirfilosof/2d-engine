@@ -144,7 +144,7 @@ void CollisionSystem::next_step(Entity* entity, SDL_Rect& Dtc_x, SDL_Rect& Dtc_y
 
 	if (pc.direction().x() != 0)
 	{
-		Dtc_x.x += pc.direction().x() * pc.speed().x() * DeltaTime::delta;
+		Dtc_x.x += pc.direction().x() * pc.speed().x() * DBHelper::delta;
 		if (buf_x.x == Dtc_x.x)
 		{
 			Dtc_x.x += pc.direction().x();
@@ -152,7 +152,7 @@ void CollisionSystem::next_step(Entity* entity, SDL_Rect& Dtc_x, SDL_Rect& Dtc_y
 	}
 	if (pc.direction().y() != 0)
 	{
-		Dtc_y.y += pc.direction().y() * pc.speed().y() * DeltaTime::delta;
+		Dtc_y.y += pc.direction().y() * pc.speed().y() * DBHelper::delta;
 		if (buf_y.y == Dtc_y.y)
 		{
 			Dtc_y.y += pc.direction().y();

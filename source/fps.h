@@ -1,10 +1,10 @@
 #ifndef FPS_H
 #define FPS_H
 
-#include "DeltaTime.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include "dbhelper.h"
 
 class fps
 {

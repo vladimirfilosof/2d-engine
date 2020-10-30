@@ -16,9 +16,6 @@ int main()
 
 	srand(time(NULL));
 
-// Class for calculating delta time 
-	DeltaTime dt;
-
 	EntityManager manager;
 	
 	manager.add_system<CollisionSystem>();
@@ -94,10 +91,10 @@ int main()
 				{
 					if (e1->get_component<TransformComponent>().size().w() < 300)
 					{
-						e1->get_component<TransformComponent>().size().w() += 200 * DeltaTime::delta;
-						e1->get_component<TransformComponent>().size().h() += 200 * DeltaTime::delta;
-						e1->get_component<TransformComponent>().coords().x() -= 50 * DeltaTime::delta;
-						e1->get_component<TransformComponent>().coords().y() -= 50 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().size().w() += 200 * DBHelper::delta;
+						e1->get_component<TransformComponent>().size().h() += 200 * DBHelper::delta;
+						e1->get_component<TransformComponent>().coords().x() -= 50 * DBHelper::delta;
+						e1->get_component<TransformComponent>().coords().y() -= 50 * DBHelper::delta;
 					}
 				}
 			});
@@ -107,10 +104,10 @@ int main()
 				{
 					if (e1->get_component<TransformComponent>().size().w() > 100)
 					{
-						e1->get_component<TransformComponent>().size().w() -= 200 * DeltaTime::delta;
-						e1->get_component<TransformComponent>().size().h() -= 200 * DeltaTime::delta;
-						e1->get_component<TransformComponent>().coords().x() += 50 * DeltaTime::delta;
-						e1->get_component<TransformComponent>().coords().y() += 50 * DeltaTime::delta;
+						e1->get_component<TransformComponent>().size().w() -= 200 * DBHelper::delta;
+						e1->get_component<TransformComponent>().size().h() -= 200 * DBHelper::delta;
+						e1->get_component<TransformComponent>().coords().x() += 50 * DBHelper::delta;
+						e1->get_component<TransformComponent>().coords().y() += 50 * DBHelper::delta;
 					}
 				}
 			});
@@ -133,7 +130,7 @@ int main()
 			{
 				if (e1->has_component<SpriteComponent>())
 				{
-					e1->get_component<SpriteComponent>().angle() += 360 * DeltaTime::delta;
+					e1->get_component<SpriteComponent>().angle() += 360 * DBHelper::delta;
 				}
 			});
 	object.get_component<ColliderComponent>().add_collisionEvent("run_area", [](Entity* e1, Entity* e2)
@@ -156,7 +153,7 @@ int main()
 	while (isWork)
 	{
 // Calculate delta time
-		dt.begin();
+		DBHelper::begin();
 
 // Check events
 		manager.update();
@@ -207,7 +204,7 @@ int main()
 
 		if (state[SDL_SCANCODE_ESCAPE]) isWork = false;
 
-		dt.end();
+		DBHelper::end();
 	}
 
 // Free memory

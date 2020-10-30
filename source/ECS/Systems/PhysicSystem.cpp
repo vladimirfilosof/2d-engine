@@ -26,7 +26,7 @@ void PhysicSystem::update()
 		{
 			PhysicComponent& pc = item->get_component<PhysicComponent>();
 			pc.direction().normalize();
-			item->get_component<TransformComponent>().coords() += pc.direction() * pc.speed() * DeltaTime::delta;
+			item->get_component<TransformComponent>().coords() += pc.direction() * pc.speed() * DBHelper::delta;
 		}
 	}
 }
