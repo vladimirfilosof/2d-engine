@@ -13,7 +13,8 @@ RenderSystem::RenderSystem(const char* window_title, const int& position_x, cons
 	renderer = SDL_CreateRenderer(window, -1, renderer_flags);
 	if (renderer == NULL) throw std::runtime_error("[RenderSystem] <RenderSystem>: renderer creating error");
 	
-	f = new fps("../font/roboto.ttf", 24);
+	FPS_Status = false;
+	f = nullptr;
 }
 
 RenderSystem::~RenderSystem()
@@ -21,7 +22,7 @@ RenderSystem::~RenderSystem()
 #ifdef DEBUG
 	std::cout << "[Debug]: RenderSystem destructor calling" << std::endl;
 #endif
-	delete f;
+	if (f) delete f;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
@@ -63,6 +64,6 @@ void RenderSystem::update()
 		}
 	}
 
-	f->print_fps();
+	if (FPS_Status) f->print_fps();
 	SDL_RenderPresent(renderer);
 }

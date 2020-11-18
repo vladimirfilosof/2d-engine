@@ -16,39 +16,43 @@ public:
 	static void begin() noexcept;
 	static void end() noexcept;
 
-	template<typename T, typename... TArgs>
-	static T check_exectime(T(*func)(TArgs... MArgs), TArgs... MArgs) noexcept
+// Functions with returning value
+	template<typename RETURN, typename... TArgs1, typename... TArgs2>
+	static RETURN check_exectime(RETURN(*func)(TArgs1...), TArgs2... MArgs) noexcept
 	{
-		fprintf (stderr, "[DBHelper]: Function with address %p begins\n\n", func);
+		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
-		T buf = func(MArgs...);
-		fprintf(stderr, "\n[DBHelper]: Function with address %p ends with duration: %f\n\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
+		RETURN buf = func(MArgs...);
+		fprintf(stderr, "[DBHelper]: Function with address %p ends with duration: %f\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
 		return buf;
 	}
-	template<typename T, typename CLASS, typename... TArgs>
-	static T check_exectime(T(CLASS::*func)(TArgs... MArgs), CLASS* obj, TArgs... MArgs) noexcept
+// Methods with returning value
+	template<typename RETURN, typename CLASS, typename... TArgs1, typename... TArgs2>
+	static RETURN check_exectime(RETURN(CLASS::*func)(TArgs1...), CLASS* obj, TArgs2... MArgs) noexcept
 	{
-		fprintf (stderr, "[DBHelper]: Function with address %p begins\n\n", func);
+		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
-		T buf = (obj->*func)(MArgs...);
-		fprintf(stderr, "\n[DBHelper]: Function with address %p ends with duration: %f\n\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
+		RETURN buf = (obj->*func)(MArgs...);
+		fprintf(stderr, "[DBHelper]: Function with address %p ends with duration: %f\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
 		return buf;
 	}
-	template<typename... TArgs>
-	static void check_exectime(void(*func)(TArgs... MArgs), TArgs... MArgs) noexcept
+// Functions without returning value
+	template<typename... TArgs1, typename... TArgs2>
+	static void check_exectime(void(*func)(TArgs1...), TArgs2... MArgs) noexcept
 	{
-		fprintf (stderr, "[DBHelper]: Function with address %p begins\n\n", func);
+		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 		func(MArgs...);
-		fprintf(stderr, "\n[DBHelper]: Function with address %p ends with duration: %f\n\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
+		fprintf(stderr, "[DBHelper]: Function with address %p ends with duration: %f\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
 	}
-	template<typename T, typename... TArgs>
-	static void check_exectime(void(T::*func)(TArgs... MArgs), T* obj, TArgs... MArgs) noexcept
+// Methods without returning value
+	template<typename CLASS, typename... TArgs1, typename... TArgs2>
+	static void check_exectime(void(CLASS::*func)(TArgs1...), CLASS* obj, TArgs2... MArgs) noexcept
 	{
-		fprintf (stderr, "[DBHelper]: Function with address %p begins\n\n", func);
+		fprintf (stderr, "[DBHelper]: Function with address %p begins\n", func);
 		std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 		(obj->*func)(MArgs...);
-		fprintf(stderr, "\n[DBHelper]: Function with address %p ends with duration: %f\n\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
+		fprintf(stderr, "[DBHelper]: Function with address %p ends with duration: %f\n", func, static_cast<std::chrono::duration<double>>(std::chrono::system_clock::now() - start).count());
 	}
 };
 

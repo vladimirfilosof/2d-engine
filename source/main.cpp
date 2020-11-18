@@ -203,6 +203,11 @@ int main()
 		}
 
 		if (state[SDL_SCANCODE_ESCAPE]) isWork = false;
+		if (state[SDL_SCANCODE_RETURN]) 
+		{
+			if (manager.get_system<RenderSystem>().get_FPSStatus()) manager.get_system<RenderSystem>().set_FPSStatus(false);
+			else manager.get_system<RenderSystem>().set_FPSStatus(true);
+		}
 
 		DBHelper::end();
 	}

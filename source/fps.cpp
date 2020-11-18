@@ -4,6 +4,7 @@
 
 fps::fps(const char* font_path, int font_size)
 {
+	TTF_Init();
 	SDL_Color c = {225,255,255};
 	this->font_size = font_size;
 	this->color = c;
@@ -11,8 +12,7 @@ fps::fps(const char* font_path, int font_size)
 	
 	if (font == nullptr)
 	{
-		std::cout << "font" << TTF_GetError();
-		exit(1);
+		throw std::runtime_error(TTF_GetError()); 
 	}
 }
 
@@ -26,8 +26,7 @@ void fps::print_fps()
 	SDL_Surface *surf = TTF_RenderUTF8_Blended(font, std::to_string((int)(1/DBHelper::delta)).c_str(), color);
 	if (surf == NULL)
 	{
-		std::cout << "surf";
-		exit(1);
+		throw std::runtime_error("Surf wasn't created");
 	}
 	SDL_Texture *out = SDL_CreateTextureFromSurface(RenderSystem::renderer, surf);
 	SDL_Rect r;
