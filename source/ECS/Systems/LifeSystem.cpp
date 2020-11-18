@@ -21,5 +21,4 @@ void LifeSystem::update()
 {
 	std::vector<Entity*>& entities = manager->get_entities();
 	std::for_each(entities.begin(), entities.end(), LifePTR);
-
 }
