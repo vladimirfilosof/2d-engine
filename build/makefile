@@ -9,19 +9,19 @@
 #---------------------------------------#
 
 # Program name (ex: test, program)
-NAME := engine 
+NAME := engine
 # Compiler name (ex: gcc, g++, clang)
 CC := g++
 # File extension (ex: .cpp, .c)
 LANG := .cpp
 # Compiler flags (ex: -Wall, -O2, -g)
-CFLAGS := -Wall -O0 -g
+CFLAGS := -Wall -O2
 # Linker flags (ex: -g )
-LDFLAGS := -g
+LDFLAGS :=
 # Libs (ex: -lm, -lncurses, -lSDL2)
 LIBS := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -L../libraries/ -ldbhelper
 # Defines (ex: -D DEBUG, -Dcount=5)
-DEF := -D DEBUG
+DEF :=
 # Directories with source code (ex: source)
 DIR := source source/ECS/ source/ECS/Components source/ECS/Systems
 
